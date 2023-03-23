@@ -1,0 +1,20 @@
+{
+  "name": "dreamscape",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/keekerr/Dreamscape.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/keekerr/Dreamscape/issues"
+  },
+  "homepage": "https://github.com/keekerr/Dreamscape#readme"
+}
