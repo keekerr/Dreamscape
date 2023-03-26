@@ -13,7 +13,7 @@ const typeDefs = gql`
     type VisionBoard {
         imageID: ID!
         imageLink: String
-        userID: User
+
     }
     
     type Diary {
@@ -21,7 +21,7 @@ const typeDefs = gql`
         title: String!
         entry: String!
         createdAt: String!
-        userID: User!
+
     }
 
     input DiaryInput {
@@ -29,13 +29,13 @@ const typeDefs = gql`
         title: String!
         entry: String!
         createdAt: String!
-        userID: User!
+
     }
     
     input VisionBoardInput {
         imageID: ID!
         imageLink: String
-        userID: User
+
     }
 
     type Auth {
