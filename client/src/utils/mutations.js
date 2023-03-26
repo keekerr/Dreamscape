@@ -21,16 +21,16 @@ export const CREATE_USER = gql`
                 username
                 email
                 images {
-                    _id
+                    imageID
                     imageLink
-                    userID
+                    
                 }
                 diaryEntries {
-                    _id
+                    entryID
                     title
                     entry
                     createdAt
-                    userID
+                    
                 }
             }
         }
@@ -43,27 +43,43 @@ export const ADD_ENTRY = gql`
             _id
             username
             diaryEntries {
-                _id
+                entryID
                 title
                 entry
                 createdAt
-                userID
+                
+            }
+        }
+    }
+`;
+
+export const EDIT_ENTRY = gql`
+    mutation editEntry($entryID: String!) {
+        editEntry(entryID: $entryID) {
+            _id
+            username
+            diaryEntries {
+                entryID
+                title
+                entry
+                createdAt
+                
             }
         }
     }
 `;
 
 export const REMOVE_ENTRY = gql`
-    mutation removeEntry($title: String!) {
-        removeEntry(title: $title) {
+    mutation removeEntry($entryID: String!) {
+        removeEntry(entryID: $entryID) {
             _id
             username
             diaryEntries {
-                _id
+                entryID
                 title
                 entry
                 createdAt
-                userID
+                
             }
         }
     }
@@ -75,9 +91,9 @@ export const ADD_IMAGE = gql`
             _id
             username
             images {
-                _id
+                imageID
                 imageLink
-                userID
+                
             }
         }
     }
@@ -89,9 +105,9 @@ export const REMOVE_IMAGE = gql`
             _id
             username
             images {
-                _id
+                imageID
                 imageLink
-                userID
+                
             }
         }
     }

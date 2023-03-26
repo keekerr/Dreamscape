@@ -94,4 +94,6 @@ const resolvers = {
             throw new AuthenticationError("You must be logged in to use this feature.")
         }
     }
-}
+};
+
+module.exports = resolvers;
