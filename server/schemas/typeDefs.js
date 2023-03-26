@@ -11,21 +11,21 @@ const typeDefs = gql`
     }
     
     type VisionBoard {
-        _id: ID!
+        imageID: ID!
         imageLink: String
         userID: User
     }
     
     type Diary {
-        _id: ID!
+        entryID: ID!
         title: String!
         entry: String!
         createdAt: String!
         userID: User!
     }
 
-    input Diary {
-        _id: ID!
+    input DiaryInput {
+        entryID: ID!
         title: String!
         entry: String!
         createdAt: String!
@@ -33,7 +33,7 @@ const typeDefs = gql`
     }
     
     input VisionBoardInput {
-        _id: ID!
+        imageID: ID!
         imageLink: String
         userID: User
     }
@@ -45,8 +45,6 @@ const typeDefs = gql`
     
     type Query {
         user(_id: ID): User
-        diary(_id: ID): Diary
-        visionBoard(_id: ID): VisionBoard
     }
 
     type Mutation {
@@ -63,16 +61,18 @@ const typeDefs = gql`
             input: DiaryInput
         ): User
         editEntry(
-            
+            entryID: ID!
         ): User
         removeEntry(
-
+            _id: ID!
+            entryID: ID!
         ): User
         addImage(
             input: VisionBoardInput
         ): User
         removeImage(
-            _id: ID
+            _id: ID!
+            imageID: ID!
         ): User
     }
     `
