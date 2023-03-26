@@ -20,10 +20,24 @@ const typeDefs = gql`
         _id: ID!
         title: String!
         entry: String!
-        createdAt: String
-        userID: User
+        createdAt: String!
+        userID: User!
+    }
+
+    input Diary {
+        _id: ID!
+        title: String!
+        entry: String!
+        createdAt: String!
+        userID: User!
     }
     
+    input VisionBoardInput {
+        _id: ID!
+        imageLink: String
+        userID: User
+    }
+
     type Auth {
         token: ID
         user: User
@@ -31,6 +45,8 @@ const typeDefs = gql`
     
     type Query {
         user(_id: ID): User
+        diary(_id: ID): Diary
+        visionBoard(_id: ID): VisionBoard
     }
 
     type Mutation {
@@ -43,6 +59,21 @@ const typeDefs = gql`
             email: String!
             password: String!
         ): Auth
+        addEntry(
+            input: DiaryInput
+        ): User
+        editEntry(
+            
+        ): User
+        removeEntry(
+
+        ): User
+        addImage(
+            input: VisionBoardInput
+        ): User
+        removeImage(
+            _id: ID
+        ): User
     }
     `
 
