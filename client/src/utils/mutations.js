@@ -47,7 +47,6 @@ export const ADD_ENTRY = gql`
                 title
                 entry
                 createdAt
-                
             }
         }
     }

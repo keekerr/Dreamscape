@@ -4,39 +4,102 @@ const { User } = require('../models');
 const { VisionBoard } = require('../models');
 
 db.once('open', async () => {
-    try {
-        // Create a new diary entry
-        const newDiaryEntry = await Diary.create({
-            title: 'My New Entry',
-            content: 'This is my new diary entry',
-            userId: 1
-        });
+    await User.deleteMany();
 
-        // Find a user by ID
-        const user = await User.findByPk(1);
+    await User.insertMany([
+        {
+            username: "john_doe",
+            email: "john_doe@example.com",
+            password: "password123",
+            images: [
+                {
+                    imageID: 1,
+                    imageLink: "https://thecatapi.com/api/images/get?format=src&type=png"
+                },
+                {
+                    imageID: 2,
+                    imageLink: "https://thecatapi.com/api/images/get?format=src&type=png"
+                },
+                {
+                    imageID: 3,
+                    imageLink: "https://thecatapi.com/api/images/get?format=src&type=png"
+                }
+            ],
+            diaryEntries: [
+                {
+                    title: "First entry",
+                    entry: "This is my first entry in my diary.",
+                    createdAt: "2022-01-01T12:00:00.000Z"
+                },
+                {
+                    title: "Second entry",
+                    entry: "Today was a great day!",
+                    createdAt: "2022-01-02T12:00:00.000Z"
+                }
+            ]
+          },
+          {
+            username: "jane_doe",
+            email: "jane_doe@example.com",
+            password: "password456",
+            images: [
+                {
+                    imageID: 4,
+                    imageLink: "https://thecatapi.com/api/images/get?format=src&type=png"
+                },
+                {
+                    imageID: 5,
+                    imageLink: "https://thecatapi.com/api/images/get?format=src&type=png"
+                },
+                {
+                    imageID: 6,
+                    imageLink: "https://thecatapi.com/api/images/get?format=src&type=png"
+                }
+            ],
+            diaryEntries: [
+                {
+                    title: "Travel diary",
+                    entry: "I'm on a trip to Europe!",
+                    createdAt: "2022-02-01T12:00:00.000Z"
+                },
+                {
+                    title: "Emotional release",
+                    entry: "I need to vent my frustrations.",
+                    createdAt: "2022-03-01T12:00:00.000Z"
+                }
+            ]
+        }
+    ])
 
-        // Create a new vision board
-        const newVisionBoard = await VisionBoard.create({
-            title: 'My Dream Car',
-            description: 'A Lamborghini Aventador',
-            imageUrl: '',
-            userId: 1
-        });
+    console.log("users seeded!")
+    //     // Create a new diary entry
+    //     const entries = await Diary.insertMany([
+    //         [
+    
+    //         ]
+    //     ]);
 
-        // Update a diary entry
-        const diaryEntryToUpdate = await Diary.findByPk(1);
-        diaryEntryToUpdate.title = 'Updated Entry Title';
-        diaryEntryToUpdate.content = 'Updated entry content';
-        await diaryEntryToUpdate.save();
+    //     // Find a user by ID
+    //     const user = await User.findByPk(1);
 
-        // Delete a vision board
-        const visionBoardToDelete = await VisionBoard.findByPk(1);
-        await visionBoardToDelete.destroy();
+    //     // Create a new vision board
+    //     const newVisionBoard = await VisionBoard.create({
+    //         imageLink: 'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?cs=srgb&dl=pexels-pixabay-45201.jpg&fm=jpg',
+    //     });
 
-        console.log('all done!');
-        process.exit(0);
-    } catch (err) {
-        console.error(err);
+    //     // Update a diary entry
+    //     const diaryEntryToUpdate = await Diary.findByPk(1);
+    //     diaryEntryToUpdate.title = 'Updated Entry Title';
+    //     diaryEntryToUpdate.content = 'Updated entry content';
+    //     await diaryEntryToUpdate.save();
+
+    //     // Delete a vision board
+    //     const visionBoardToDelete = await VisionBoard.findByPk(1);
+    //     await visionBoardToDelete.destroy();
+
+    //     console.log('all done!');
+    //     process.exit(0);
+    // } catch (err) {
+    //     console.error(err);
         process.exit(1);
-    }
 });
