@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Dream Vacation",
+        "description": "My dream vacation to Hawaii",
+        "imageUrl": "",
+        "createdAt": "2022-01-01T12:00:00.000Z",
+        "updatedAt": "2022-01-01T12:00:00.000Z",
+        "userId": 1
+    },
+    {
+        "title": "Dream Home",
+        "description": "My dream home in the countryside",
+        "imageUrl": "",
+        "createdAt": "2022-02-01T12:00:00.000Z",
+        "updatedAt": "2022-02-01T12:00:00.000Z",
+        "userId": 1
+    },
+    {
+        "title": "Dream Career",
+        "description": "My dream career as a chef",
+        "imageUrl": "",
+        "createdAt": "2022-03-01T12:00:00.000Z",
+        "updatedAt": "2022-03-01T12:00:00.000Z",
+        "userId": 2
+    }
+]

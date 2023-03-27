@@ -1,0 +1,17 @@
+[
+    {
+      "username": "john_doe",
+      "email": "john_doe@example.com",
+      "password": "password123",
+      "createdAt": "2022-01-01T12:00:00.000Z",
+      "updatedAt": "2022-01-01T12:00:00.000Z"
+    },
+    {
+      "username": "jane_doe",
+      "email": "jane_doe@example.com",
+      "password": "password456",
+      "createdAt": "2022-02-01T12:00:00.000Z",
+      "updatedAt": "2022-02-01T12:00:00.000Z"
+    }
+  ]
+  
