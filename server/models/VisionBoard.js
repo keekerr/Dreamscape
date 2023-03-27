@@ -6,11 +6,6 @@ const visionBoardSchema = new Schema({
       type: String,
       required: true,
       trim: true
-    },
-    userID: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
     }
 });
   

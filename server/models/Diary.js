@@ -15,11 +15,6 @@ const diarySchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    },
-    userID: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
     }
 });
 
