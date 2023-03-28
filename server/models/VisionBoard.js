@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const visionBoardSchema = new Schema({
+  imageID: {
+    type: Schema.Types.ObjectId,
+    default: () => new Types.ObjectId(),
+  },
     imageLink: {
       type: String,
       required: true,
