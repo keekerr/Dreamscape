@@ -1,7 +1,5 @@
 const db = require('../config/connection');
-const { Diary } = require('../models');
 const { User } = require('../models');
-const { VisionBoard } = require('../models');
 
 db.once('open', async () => {
     await User.deleteMany();
@@ -27,11 +25,13 @@ db.once('open', async () => {
             ],
             diaryEntries: [
                 {
+                    entryID: 1,
                     title: "First entry",
                     entry: "This is my first entry in my diary.",
                     createdAt: "2022-01-01T12:00:00.000Z"
                 },
                 {
+                    entryID: 2,
                     title: "Second entry",
                     entry: "Today was a great day!",
                     createdAt: "2022-01-02T12:00:00.000Z"
@@ -58,11 +58,13 @@ db.once('open', async () => {
             ],
             diaryEntries: [
                 {
+                    entryID: 3,
                     title: "Travel diary",
                     entry: "I'm on a trip to Europe!",
                     createdAt: "2022-02-01T12:00:00.000Z"
                 },
                 {
+                    entryID: 4,
                     title: "Emotional release",
                     entry: "I need to vent my frustrations.",
                     createdAt: "2022-03-01T12:00:00.000Z"

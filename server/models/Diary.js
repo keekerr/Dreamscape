@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const diarySchema = new Schema({
+    entryID: {
+        type: Schema.Types.ObjectId,
+        default: () => new Types.ObjectId(),
+    },
     title: {
         type: String,
         required: true,

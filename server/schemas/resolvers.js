@@ -5,11 +5,11 @@ const { AuthenticationError } = require('apollo-server-express');
 const resolvers = {
     Query: {
         user: async (parent, args, context) => {
-            // if (context.user) {'
-                return User.findOne({ _id: "64209cf665bbc870c8c5c856" });
+            if (context.user) {
+                return User.findOne({ _id: context.user._id });
             }
-        //     throw new AuthenticationError("You must be logged in to use this feature.")
-        // }
+            throw new AuthenticationError("You must be logged in to use this feature.")
+        }
     },
     Mutation: {
         loginUser: async (parent, { email, password }) => {
@@ -34,16 +34,16 @@ const resolvers = {
             return { token, user };
         },
         addEntry: async (parent, { input }, context) => {
-            // if (context.user) {
+            if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
-                    { _id: '64209cf665bbc870c8c5c856' },
+                    { _id: context.user._id },
                     { $push: { diaryEntries: input } },
                     { new: true }
                 )
 
                 return updatedUser
-            // }
-            // throw new AuthenticationError("You must be logged in to use this feature.")
+            }
+            throw new AuthenticationError("You must be logged in to use this feature.")
         },
         editEntry: async (parent, { input }, context) => {
             if (context.user) {
@@ -73,7 +73,7 @@ const resolvers = {
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $push: { images: input } },
+                    { $push: { images: imageID } },
                     { new: true }
                 )
 
