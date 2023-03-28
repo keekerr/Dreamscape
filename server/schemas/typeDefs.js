@@ -38,9 +38,20 @@ const typeDefs = gql`
         token: ID
         user: User
     }
+
+    type PhotoUrls {
+        regular: String!
+    }
+
+    type Photo {
+        id: String!
+        urls: PhotoUrls!
+    }
     
     type Query {
         user(_id: ID): User
+        photos: [Photo!]!
+
     }
 
     type Mutation {
