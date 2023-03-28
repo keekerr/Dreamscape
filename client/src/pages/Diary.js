@@ -1,5 +1,71 @@
-// Need to use:
-// Diary Query
-// Add Diary Entry Mutation
-// Update Diary Entry Mutation
-// Remove Diary Entry Mutation
+import React, { useState } from 'react';
+import { useQuery, useMutation } from '@apollo/client';
+import { GET_USER } from '../utils/queries';
+import { ADD_ENTRY, EDIT_ENTRY, REMOVE_ENTRY } from '../utils/mutations';
+import Auth from '../utils/auth';
+
+const DiaryEntries = () => {
+    const [formData, setFormData] = useState({ title: '', entry: '' });
+    const { data } = useQuery(GET_USER);
+    const [addEntry] = useMutation(ADD_ENTRY);
+    const [editEntry] = useMutation(EDIT_ENTRY);
+    const [removeEntry] = useMutation(REMOVE_ENTRY);
+
+    const userDiaryData = data?.user.diaryEntries;
+    console.log(userDiaryData);
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleAddEntry = async () => {
+        const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+        if (!token) {
+            return false;
+        }
+
+        try {
+            await addEntry({
+                variables: { input: { ...formData } }
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    // not confident in this...
+    const handleEditEntry = async () => {
+        const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+        if (!token) {
+            return false;
+        }
+
+        try {
+            await editEntry({
+                variables: { input: { ...formData } }
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const handleRemoveEntry = async (entryID) => {
+        const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+        if (!token) {
+            return false;
+        }
+
+        try {
+            await removeEntry({
+                variables: { entryID }
+            });
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+}
