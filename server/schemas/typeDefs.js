@@ -13,23 +13,19 @@ const typeDefs = gql`
     type VisionBoard {
         imageID: ID!
         imageLink: String
-
     }
     
     type Diary {
-        entryID: ID!
+        entryID: ID
         title: String!
         entry: String!
-        createdAt: String!
+        createdAt: String
 
     }
 
     input DiaryInput {
-        entryID: ID!
         title: String!
         entry: String!
-        createdAt: String!
-
     }
     
     input VisionBoardInput {

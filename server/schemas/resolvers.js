@@ -6,7 +6,7 @@ const resolvers = {
     Query: {
         user: async (parent, args, context) => {
             if (context.user) {
-                return User.findOne({ _id: context.user._id });
+                return User.findOne({ _id: context.user._id }).select("-__v -password");
             }
             throw new AuthenticationError("You must be logged in to use this feature.")
         }

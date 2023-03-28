@@ -22,15 +22,13 @@ export const CREATE_USER = gql`
                 email
                 images {
                     imageID
-                    imageLink
-                    
+                    imageLink    
                 }
                 diaryEntries {
                     entryID
                     title
                     entry
                     createdAt
-                    
                 }
             }
         }
@@ -62,7 +60,6 @@ export const EDIT_ENTRY = gql`
                 title
                 entry
                 createdAt
-                
             }
         }
     }
@@ -78,7 +75,6 @@ export const REMOVE_ENTRY = gql`
                 title
                 entry
                 createdAt
-                
             }
         }
     }
@@ -92,7 +88,6 @@ export const ADD_IMAGE = gql`
             images {
                 imageID
                 imageLink
-                
             }
         }
     }
@@ -106,7 +101,6 @@ export const REMOVE_IMAGE = gql`
             images {
                 imageID
                 imageLink
-                
             }
         }
     }
