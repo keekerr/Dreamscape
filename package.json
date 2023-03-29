@@ -32,6 +32,8 @@
     "express": "^4.17.1",
     "graphql": "^16.6.0",
     "node-fetch": "^2.6.9",
-    "unsplash-js": "^6.0.0"
+    "react-uploader": "^3.13.0",
+    "unsplash-js": "^6.0.0",
+    "whatwg-fetch": "^3.6.2"
   }
 }

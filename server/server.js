@@ -9,6 +9,7 @@ require('dotenv').config();
 const Unsplash = require('unsplash-js').default;
 const fetch = require('node-fetch');
 const fs = require('fs');
+const FormData = require('form-data');
 
 const unsplash = new Unsplash({
   accessKey: process.env.UNSPLASH_ACCESS_KEY,
@@ -21,6 +22,50 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
+});
+
+// Upload image using react-uploader
+app.post('/api/upload', async (req, res) => {
+  try {
+    if (!req.files) {
+      return res.status(400).send('No files were uploaded.');
+    }
+
+    const file = req.files.file;
+    const filename = `${Date.now()}-${file.name}`;
+    const path = `./uploads/${filename}`;
+
+    await file.mv(path);
+
+    res.json({
+      message: 'File uploaded successfully',
+      fileUrl: `http://localhost:${PORT}/uploads/${filename}`,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Failed to upload file');
+  }
+});
+
+// Download image from Unsplash
+app.post('/api/unsplash/download', async (req, res) => {
+  try {
+    const { downloadLocation } = req.body;
+
+    const response = await fetch(downloadLocation);
+    const buffer = await response.buffer();
+    const filename = `${Date.now()}.jpg`;
+    const path = `./downloads/${filename}`;
+    await fs.promises.writeFile(path, buffer);
+
+    res.json({
+      message: 'Photo downloaded successfully',
+      downloadUrl: `http://localhost:${PORT}/downloads/${filename}`,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Failed to download photo from Unsplash API');
+  }
 });
 
 app.get('/api/unsplash', async (req, res) => {
@@ -58,26 +103,6 @@ app.get('/api/unsplash', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send('Failed to fetch photos from Unsplash API');
-  }
-});
-
-app.post('/api/unsplash/download', async (req, res) => {
-  try {
-    const { downloadLocation } = req.body;
-
-    const response = await fetch(downloadLocation);
-    const buffer = await response.buffer();
-    const filename = `${Date.now()}.jpg`;
-    const path = `./downloads/${filename}`;
-    await fs.promises.writeFile(path, buffer);
-
-    res.json({
-      message: 'Photo downloaded successfully',
-      downloadUrl: `http://localhost:${PORT}/downloads/${filename}`,
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Failed to download photo from Unsplash API');
   }
 });
 
