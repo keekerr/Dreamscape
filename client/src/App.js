@@ -1,4 +1,7 @@
 import React, { useState, useCallback } from 'react';
+import NavBar from './components/NavBar';
+import Diary from  './pages/Diary'
+import DiaryEntry from './components/DiaryEntry'
 
 function App() {
   const [query, setQuery] = useState('');
@@ -29,21 +32,26 @@ function App() {
   }, []);
 
   return (
+    // <div>
+    //   <input
+    //     type="text"
+    //     value={query}
+    //     onChange={e => setQuery(e.target.value)}
+    //   />
+    //   <button onClick={handleSearch}>Search</button>
+    //   <div>
+    //     {photos.map(photo => (
+    //       <div key={photo.id}>
+    //         <img src={photo.urls.thumb} alt={photo.alt_description} />
+    //         <button onClick={() => trackDownload(photo)}>Download</button>
+    //       </div>
+    //     ))}
+    //   </div>
+
     <div>
-      <input
-        type="text"
-        value={query}
-        onChange={e => setQuery(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
-      <div>
-        {photos.map(photo => (
-          <div key={photo.id}>
-            <img src={photo.urls.thumb} alt={photo.alt_description} />
-            <button onClick={() => trackDownload(photo)}>Download</button>
-          </div>
-        ))}
-      </div>
+    <NavBar />
+      <Diary />
+      <DiaryEntry />
     </div>
   );
 }
