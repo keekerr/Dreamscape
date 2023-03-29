@@ -32,7 +32,34 @@ export const Input = styled.input`
     outline: none;
     border: 1px solid rgba(200, 200, 200, 0.0.3);
     padding: 0px 10px;
-    &:focus {
+
+    &:placeholder {
+        color: yellowgreen
+    }
+
+    &:not(:last-of-type) {
+        border-bottom: 1.5px solid rgba(200, 200, 200, 0.0.3);
+    }
+
+    &:focus{
         outline: none;
+        border-bottom: 1.5px solid rgba(200, 200, 200, 0.0.3);
+    }
+`;
+
+export const SubmitButton = styled.button`
+    width: 100%;
+    padding: 11px 40%;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 100px 100px 100px 100px;
+    cursor: pointer;
+    transition: all, 240ms ease-in-out;
+    background: gray;
+
+    &:hover {
+        filter: brightness(1.03)
     }
 `;
