@@ -30,12 +30,47 @@ const BackDrop = styled.div`
     display: flex;
     flex-direction: column;
     border-radius: 50%;
+    transform: rotate(60degrees);
+    top: -290px;
+    left: -70px;
+    background: gray;
 `;
 
-export function AccountBox(props){
-    return <BoxContainer>
+const HeaderContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+`;
+
+const HeaderText = styled.h2`
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.24;
+    color: black;
+    z-index: 10;
+    margin: 0;
+`;
+
+const SmallText = styled.h5`
+    color: black;
+    font-weight: 500;
+    font-size: 11px;
+    z-index: 10;
+    margin: 0;
+    margin-top: 7px;
+`;
+// gradient or image?
+export function AccountBox(props) {
+    return (
+    <BoxContainer>
         <TopContainer>
-            <BackDrop/>
+            <BackDrop />
+            <HeaderContainer>
+                <HeaderText>Hello</HeaderText>
+                <HeaderText>Test</HeaderText>
+                <SmallText>sign in to continue</SmallText>
+            </HeaderContainer>
         </TopContainer>
     </BoxContainer>
+    );
 }

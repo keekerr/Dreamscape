@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import styled from "styled-components";
+import { AccountBox } from './accountBox';
 
 const AppContainer = styled.div`
   width: 100%;
@@ -12,8 +13,10 @@ const AppContainer = styled.div`
 `;
 
 function App() {
-  return <AppContainer>ello World!</AppContainer>;
-  
+  return <AppContainer>
+    <AccountBox />
+  </AppContainer>
+    
 }
 
 export default App;
