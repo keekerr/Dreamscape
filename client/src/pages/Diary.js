@@ -70,7 +70,7 @@ const DiaryEntries = () => {
 
     return (
       <div>
-        <h1 class='text-center m-5'>Welcome your Diary</h1>
+        <h1 class='text-center m-5'>Welcome to your Diary</h1>
         <form>
           <div class='mx-5'>
             <label for='exampleInputEmail1' class='form-label'>
