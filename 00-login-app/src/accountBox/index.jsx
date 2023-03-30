@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { LoginForm } from "./loginForm";
+import { motion } from "framer-motion";
 
 const BoxContainer = styled.div`
     width: 280px;
@@ -24,7 +25,7 @@ const TopContainer = styled.div`
     padding-bottom: 5em;
 `;
 
-const BackDrop = styled.div`
+const BackDrop = styled(motion.div)`
     width: 160%;
     height: 550px;
     position: absolute;
@@ -65,23 +66,48 @@ const InnerContainer = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
+    padding: 0 1.8em;
 `;
 
-// gradient or image?
-export function AccountBox(props) {
-    return (
-    <BoxContainer>
-        <TopContainer>
-            <BackDrop />
-            <HeaderContainer>
-                <HeaderText>Hello</HeaderText>
-                <HeaderText>Test</HeaderText>
-                <SmallText>sign in to continue</SmallText>
-            </HeaderContainer>
-        </TopContainer>
-        <InnerContainer>
-            <LoginForm />
-        </InnerContainer>
-    </BoxContainer>
-    );
+const backdropVariants = {
+    expanded: {
+        width: "233%",
+        height: "1050px",
+        borderRadius: "20%",
+        transform: "rotate(60deg)"
+    },
+    collapsed: {
+        width: "160%",
+        height: "550px",
+        borderRadius: "50%",
+        transform: "rotate(60deg)"
+    }
 }
+
+export function AccountBox(props) {
+    const [isExpanded, setExpanded] = useState(false);
+
+    const playExpandingAnimation = () => {
+        setExpanded(true);
+        setTimeout(() => {
+            setExpanded(false);
+        }, 3000);
+    };
+
+    return (
+        <BoxContainer>
+            <TopContainer>
+            <BackDrop initial={false} animate={isExpanded ? "expanded" : "collapsed"} variants={backdropVariants} />
+            <HeaderContainer>
+                <HeaderText>Welcome</HeaderText>
+                <HeaderText>Back</HeaderText>
+                <SmallText>Please sign-in to continue!</SmallText>
+            </HeaderContainer>
+            </TopContainer>
+            <InnerContainer>
+                <LoginForm />
+                <p onClick={playExpandingAnimation}>test!</p>
+            </InnerContainer>
+        </BoxContainer>
+    );
+};
