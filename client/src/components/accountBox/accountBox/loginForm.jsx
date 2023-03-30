@@ -10,8 +10,8 @@ import {
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../utils/mutations';
-import Auth from '../utils/auth';
+import { LOGIN_USER } from '../../../utils/mutations';
+import Auth from '../../../utils/auth';
 
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
