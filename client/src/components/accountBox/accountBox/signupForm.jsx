@@ -10,8 +10,8 @@ import {
 import { Marginer } from "../marginer";
 import { AccountContext } from "./accountContext";
 import { useMutation } from '@apollo/client';
-import Auth from '../utils/auth';
-import { CREATE_USER } from '../utils/mutations';
+import Auth from '../../../utils/auth';
+import { CREATE_USER } from '../../../utils/mutations';
 
 export function SignupForm(props) {
   const { switchToSignin } = useContext(AccountContext);
@@ -48,11 +48,19 @@ export function SignupForm(props) {
 
   return (
     <BoxContainer>
-      <FormContainer>
-        <Input type="text" placeholder="Full Name" />
-        <Input type="email" placeholder="Email" />
-        <Input type="password" placeholder="Password" />
-        <Input type="password" placeholder="Confirm Password" />
+      <FormContainer onSubmit={handleFormSubmit}>
+        <Input 
+        type="text" 
+        placeholder="Username"
+        onChange={handleInputChange} />
+        <Input 
+        type="email" 
+        placeholder="Email"
+        onChange={handleInputChange} />
+        <Input 
+        type="password" 
+        placeholder="Password"
+        onChange={handleInputChange} />
       </FormContainer>
       <Marginer direction="vertical" margin={10} />
       <SubmitButton type="submit">Signup</SubmitButton>
