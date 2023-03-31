@@ -73,7 +73,7 @@ const DiaryEntries = () => {
         <h1 className='text-center m-5'>Welcome to your Diary</h1>
         <form>
           <div className='mx-5'>
-            <label for='exampleInputEmail1' className='form-label'>
+            <label form='exampleInputEmail1' className='form-label'>
             </label>
             <input
               type='text'
@@ -85,7 +85,7 @@ const DiaryEntries = () => {
             </div>
           </div>
           <div className='mx-5'>
-            <label for='exampleFormControlTextarea1' className='form-label'>
+            <label form='exampleFormControlTextarea1' className='form-label'>
             </label>
             <textarea
               className='form-control'

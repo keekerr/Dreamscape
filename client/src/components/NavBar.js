@@ -4,7 +4,7 @@ function NavBar() {
   return (
     <nav className='navbar navbar-expand-lg bg-dark'>
       <div className='container-fluid p-1 px-3'>
-        <a className='navbar-brand text-light'>DREAMSCAPE</a>
+        <a className='navbar-brand text-light' href='/'>DREAMSCAPE</a>
 
         <button
           className='navbar-toggler'
