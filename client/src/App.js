@@ -1,9 +1,18 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
+import { useState, useCallback } from 'react';
 import NavBar from './components/NavBar';
 import Diary from './pages/Diary';
 import VisionBoard from './pages/VisionBoard'
 import DiaryEntry from './components/DiaryEntry';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { LoginForm } from './components/accountBox/accountBox/loginForm';
+import { SignupForm } from './components/accountBox/accountBox/signupForm';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+
+const client = new ApolloClient({
+  uri: '/graphql',
+  cache: new InMemoryCache(),
+});
 
 function App() {
   const [query, setQuery] = useState('');
@@ -34,16 +43,20 @@ function App() {
   }, []);
 
   return (
+    <ApolloProvider client={client}>
     <Router>
       <div className='App'>
         <NavBar />
         <div className='page-container'>
           <Routes>
             <Route path='/diary' element={<Diary />} />
+            <Route path='/login' element={<LoginForm />} />
+            <Route path='/signup' element={<SignupForm />} />
           </Routes>
         </div>
       </div>
     </Router>
+    </ApolloProvider>
     // <div>
     //   <input
     //     type="text"
