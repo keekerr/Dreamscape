@@ -11,31 +11,31 @@ const resolvers = {
             }
             throw new AuthenticationError("You must be logged in to use this feature.")
         },
-        photos: async () => {
-            const query = gql`
-              query {
-                photos {
-                  id
-                  urls {
-                    regular
-                  }
-                }
-              }
-            `;
+        // photos: async () => {
+        //     const query = gql`
+        //       query {
+        //         photos {
+        //           id
+        //           urls {
+        //             regular
+        //           }
+        //         }
+        //       }
+        //     `;
 
-            const unsplashAccessKey = process.env.UNSPLASH_ACCESS_KEY;
-            const headers = {
-                Authorization: `Client-ID ${unsplashAccessKey}`,
-            };
+        //     const unsplashAccessKey = process.env.UNSPLASH_ACCESS_KEY;
+        //     const headers = {
+        //         Authorization: `Client-ID ${unsplashAccessKey}`,
+        //     };
 
-            try {
-                const data = await request('https://api.unsplash.com/graphql', query, { headers });
-                return data.photos;
-            } catch (error) {
-                console.error(error);
-                throw new Error('Failed to fetch photos from Unsplash API');
-            }
-        },
+        //     try {
+        //         const data = await request('https://api.unsplash.com/graphql', query, { headers });
+        //         return data.photos;
+        //     } catch (error) {
+        //         console.error(error);
+        //         throw new Error('Failed to fetch photos from Unsplash API');
+        //     }
+        // },
     },
     Mutation: {
         loginUser: async (parent, { email, password }) => {
