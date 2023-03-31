@@ -2,12 +2,12 @@ import React from 'react';
 
 function NavBar() {
   return (
-    <nav class='navbar navbar-expand-lg bg-dark'>
-      <div class='container-fluid p-1 px-3'>
-        <a class='navbar-brand text-light'>DREAMSCAPE</a>
+    <nav className='navbar navbar-expand-lg bg-dark'>
+      <div className='container-fluid p-1 px-3'>
+        <a className='navbar-brand text-light' href='/'>DREAMSCAPE</a>
 
         <button
-          class='navbar-toggler'
+          className='navbar-toggler'
           type='button'
           data-bs-toggle='collapse'
           data-bs-target='#navbarNavAltMarkup'
@@ -15,18 +15,18 @@ function NavBar() {
           aria-expanded='false'
           aria-label='Toggle navigation'
         >
-          <span class='navbar-toggler-icon'></span>
+          <span className='navbar-toggler-icon'></span>
         </button>
-        <div class='collapse navbar-collapse' id='navbarNavAltMarkup'>
+        <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
 
-          <div class='navbar-nav'>
-            <a class='nav-link text-light' aria-current='page' href='diary'>
+          <div className='navbar-nav'>
+            <a className='nav-link text-light' aria-current='page' href='diary'>
               Diary
             </a>
-            <a class='nav-link text-light' href='visionboard'>
+            <a className='nav-link text-light' href='visionboard'>
               Vision Board
             </a>
-            <a class='nav-link text-light' href='login'>
+            <a className='nav-link text-light' href='login'>
               Login
             </a>
           </div>

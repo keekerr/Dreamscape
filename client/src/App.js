@@ -1,5 +1,7 @@
 import React from 'react';
 import { useState, useCallback } from 'react';
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import NavBar from './components/NavBar';
 import Diary from './pages/Diary';
 import VisionBoard from './pages/VisionBoard'
@@ -9,38 +11,54 @@ import { LoginForm } from './components/accountBox/accountBox/loginForm';
 import { SignupForm } from './components/accountBox/accountBox/signupForm';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
-const client = new ApolloClient({
+const httpLink = createHttpLink({
   uri: '/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('id_token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
 function App() {
-  const [query, setQuery] = useState('');
-  const [photos, setPhotos] = useState([]);
+  // const [query, setQuery] = useState('');
+  // const [photos, setPhotos] = useState([]);
 
-  const handleSearch = useCallback(async () => {
-    try {
-      const response = await fetch(`/api/unsplash?query=${query}`);
-      const data = await response.json();
-      setPhotos(data);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [query]);
+  // const handleSearch = useCallback(async () => {
+  //   try {
+  //     const response = await fetch(`/api/unsplash?query=${query}`);
+  //     const data = await response.json();
+  //     setPhotos(data);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }, [query]);
 
-  const trackDownload = useCallback(async (photo) => {
-    try {
-      await fetch('/api/unsplash/download', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ downloadLocation: photo.links.download_location }),
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
+  // const trackDownload = useCallback(async (photo) => {
+  //   try {
+  //     await fetch('/api/unsplash/download', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({ downloadLocation: photo.links.download_location }),
+  //     });
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }, []);
 
   return (
     <ApolloProvider client={client}>
@@ -51,7 +69,8 @@ function App() {
           <Routes>
             <Route path='/diary' element={<Diary />} />
             <Route path='/login' element={<LoginForm />} />
-            <Route path='/signup' element={<SignupForm />} />
+            <Route path='/login' element={<LoginForm />} />
+            <Route path='/' element={<VisionBoard />} />
           </Routes>
         </div>
       </div>
@@ -74,5 +93,6 @@ function App() {
     //   </div>
   );
 }
+
 
 export default App;
