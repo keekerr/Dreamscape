@@ -3,7 +3,6 @@ import { useQuery, useMutation } from '@apollo/client';
 import { GET_USER } from '../utils/queries';
 import { ADD_IMAGE, REMOVE_IMAGE } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { GET_USER } from '../utils/queries';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
@@ -60,16 +59,16 @@ const VisionBoard = () => {
 
     // function for moving image
 
-    const moveImage = useCallback((dragIndex, hoverIndex) => {
-        setImages((prevImages) =>
-            update(prevImages, {
-                $splice: [
-                    [dragIndex, 1],
-                    [hoverIndex, 0, prevImages[dragIndex]],
-                ],
-            }),
-        ) 
-    }, [])
+    // const moveImage = useCallback((dragIndex, hoverIndex) => {
+    //     setImages((prevImages) =>
+    //         update(prevImages, {
+    //             $splice: [
+    //                 [dragIndex, 1],
+    //                 [hoverIndex, 0, prevImages[dragIndex]],
+    //             ],
+    //         }),
+    //     ) 
+    // }, [])
 
     return (
     <DndProvider backend={HTML5Backend}>
@@ -80,3 +79,5 @@ const VisionBoard = () => {
 
     }
 }
+
+export default VisionBoard;
