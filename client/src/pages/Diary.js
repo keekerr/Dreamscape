@@ -70,31 +70,31 @@ const DiaryEntries = () => {
 
     return (
       <div>
-        <h1 class='text-center m-5'>Welcome your Diary</h1>
+        <h1 className='text-center m-5'>Welcome your Diary</h1>
         <form>
-          <div class='mx-5'>
-            <label for='exampleInputEmail1' class='form-label'>
+          <div className='mx-5'>
+            <label for='exampleInputEmail1' className='form-label'>
             </label>
             <input
               type='text'
-              class='form-control'
+              className='form-control'
               id='diary-title'
               placeholder='Enter title for Diary entry here...'
             />
-            <div id='emailHelp' class='form-text'>
+            <div id='emailHelp' className='form-text'>
             </div>
           </div>
-          <div class='mx-5'>
-            <label for='exampleFormControlTextarea1' class='form-label'>
+          <div className='mx-5'>
+            <label for='exampleFormControlTextarea1' className='form-label'>
             </label>
             <textarea
-              class='form-control'
+              className='form-control'
               id='diary-text'
               rows='3'
               placeholder='Enter text for Diary entry here...'
             ></textarea>
           </div>
-          <button type='submit' class='btn btn-dark mx-5 my-2 px-4'>
+          <button type='submit' className='btn btn-dark mx-5 my-2 px-4'>
             Submit
           </button>
         </form>
