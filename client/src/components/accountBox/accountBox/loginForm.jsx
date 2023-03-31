@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import React from 'react';
+import { useState, useContext } from 'react';
 import {
   BoldLink,
   BoxContainer,
@@ -7,7 +8,7 @@ import {
   MutedLink,
   SubmitButton,
 } from "./common";
-import { Marginer } from "../marginer";
+import { Marginer } from "../../marginer";
 import { AccountContext } from "./accountContext";
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../../utils/mutations';
@@ -72,7 +73,7 @@ export function LoginForm(props) {
       <Marginer direction="vertical" margin="1em" />
       <MutedLink href="#">
         Don't have an accoun?{" "}
-        <BoldLink href="#" onClick={switchToSignup}>
+        <BoldLink href="signup" onClick={switchToSignup}>
           Signup
         </BoldLink>
       </MutedLink>

@@ -4,6 +4,7 @@ import { GET_USER } from '../utils/queries';
 import { ADD_IMAGE, REMOVE_IMAGE } from '../utils/mutations';
 import Auth from '../utils/auth';
 
+
 // will need to edit this when unsplash is implemented
 const VisionBoard = () => {
     const [imageData, setImageData] = useState({ imageLink: '' });

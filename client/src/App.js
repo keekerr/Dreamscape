@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
+import { useState, useCallback } from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import NavBar from './components/NavBar';
@@ -6,6 +7,9 @@ import Diary from './pages/Diary';
 import VisionBoard from './pages/VisionBoard'
 import DiaryEntry from './components/DiaryEntry';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { LoginForm } from './components/accountBox/accountBox/loginForm';
+import { SignupForm } from './components/accountBox/accountBox/signupForm';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -64,13 +68,31 @@ function App() {
         <div className='page-container'>
           <Routes>
             <Route path='/diary' element={<Diary />} />
-            <Route path='/visionboard' element={<VisionBoard />} />
+            <Route path='/login' element={<LoginForm />} />
+            <Route path='/login' element={<LoginForm />} />
+            <Route path='/' element={<VisionBoard />} />
           </Routes>
         </div>
       </div>
     </Router>
     </ApolloProvider>
+    // <div>
+    //   <input
+    //     type="text"
+    //     value={query}
+    //     onChange={e => setQuery(e.target.value)}
+    //   />
+    //   <button onClick={handleSearch}>Search</button>
+    //   <div>
+    //     {photos.map(photo => (
+    //       <div key={photo.id}>
+    //         <img src={photo.urls.thumb} alt={photo.alt_description} />
+    //         <button onClick={() => trackDownload(photo)}>Download</button>
+    //       </div>
+    //     ))}
+    //   </div>
   );
 }
+
 
 export default App;
