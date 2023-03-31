@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USER } from '../utils/queries';
 import { ADD_IMAGE, REMOVE_IMAGE } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { GET_USER } from '../utils/queries';
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 // will need to edit this when unsplash is implemented
 const VisionBoard = () => {
@@ -50,5 +52,31 @@ const VisionBoard = () => {
         } catch (err) {
             console.error(err);
         }
+    }
+
+    // array for images
+
+
+
+    // function for moving image
+
+    const moveImage = useCallback((dragIndex, hoverIndex) => {
+        setImages((prevImages) =>
+            update(prevImages, {
+                $splice: [
+                    [dragIndex, 1],
+                    [hoverIndex, 0, prevImages[dragIndex]],
+                ],
+            }),
+        ) 
+    }, [])
+
+    return (
+    <DndProvider backend={HTML5Backend}>
+        
+    </DndProvider>)
+
+    function newFunction() {
+
     }
 }
