@@ -74,22 +74,6 @@ function App() {
       </div>
     </Router>
     </ApolloProvider>
-    // <div>
-    //   <input
-    //     type="text"
-    //     value={query}
-    //     onChange={e => setQuery(e.target.value)}
-    //   />
-    //   <button onClick={handleSearch}>Search</button>
-    //   <div>
-    //     {photos.map(photo => (
-    //       <div key={photo.id}>
-    //         <img src={photo.urls.thumb} alt={photo.alt_description} />
-    //         <button onClick={() => trackDownload(photo)}>Download</button>
-    //       </div>
-    //     ))}
-    //   </div>
-    // }
   );
 }
 
