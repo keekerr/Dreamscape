@@ -127,7 +127,7 @@ const VisionBoard = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type='submit' variant='success' size='lg'>
+                <Button type='submit' variant='success' size='lg' className='btn btn-dark mx-5 my-2 px-4'>
                   Submit
                 </Button>
               </Col>
