@@ -10,13 +10,13 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 
 // will need to edit this when unsplash is implemented
 const VisionBoard = () => {
-    // const [imageData, setImageData] = useState({ imageLink: '' });
-    // const { data } = useQuery(GET_USER);
-    // const [addImage] = useMutation(ADD_IMAGE);
-    // const [removeImage] = useMutation(REMOVE_IMAGE);
+    const [imageData, setImageData] = useState({ imageLink: '' });
+    const { data } = useQuery(GET_USER);
+    const [addImage] = useMutation(ADD_IMAGE);
+    const [removeImage] = useMutation(REMOVE_IMAGE);
 
-    // const visionBoardData = data?.user.images;
-    // console.log(visionBoardData);
+    const visionBoardData = data?.user.images;
+    console.log(visionBoardData);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;

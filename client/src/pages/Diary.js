@@ -4,15 +4,20 @@ import { GET_USER } from '../utils/queries';
 import { ADD_ENTRY, EDIT_ENTRY, REMOVE_ENTRY } from '../utils/mutations';
 import Auth from '../utils/auth';
 
-const DiaryEntries = () => {
-    // const [formData, setFormData] = useState({ title: '', entry: '' });
-    // const { data } = useQuery(GET_USER);
-    // const [addEntry] = useMutation(ADD_ENTRY);
-    // const [editEntry] = useMutation(EDIT_ENTRY);
-    // const [removeEntry] = useMutation(REMOVE_ENTRY);
+require('react-dom');
+window.React2 = require('react');
+console.log(window.React1 === window.React2);
 
-    // const userDiaryData = data?.user.diaryEntries;
-    // console.log(userDiaryData);
+const DiaryEntries = () => {
+    const [formData, setFormData] = useState({ title: '', entry: '' });
+    const { data, error } = useQuery(GET_USER);
+    console.log(error)
+    const [addEntry] = useMutation(ADD_ENTRY);
+    const [editEntry] = useMutation(EDIT_ENTRY);
+    const [removeEntry] = useMutation(REMOVE_ENTRY);
+
+    const userDiaryData = data?.user.diaryEntries;
+    console.log(userDiaryData);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
