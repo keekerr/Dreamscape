@@ -54,15 +54,18 @@ export function LoginForm(props) {
 
   return (
     <BoxContainer>
-      <FormContainer onSubmit={handleFormSubmit}>
+      <FormContainer 
+        noValidate 
+        validated={validated} 
+        onSubmit={handleFormSubmit}>
         <Input 
-        type="email" 
-        placeholder="Email"
-        onChange={handleInputChange} />
+          type="email" 
+          placeholder="Email"
+          onChange={handleInputChange} />
         <Input 
-        type="password" 
-        placeholder="Password"
-        onChange={handleInputChange} />
+          type="password" 
+          placeholder="Password"
+          onChange={handleInputChange} />
       </FormContainer>
       <Marginer direction="vertical" margin={10} />
       <MutedLink href="#">Forget your password?</MutedLink>

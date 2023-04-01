@@ -9,7 +9,8 @@ import DiaryEntry from './components/DiaryEntry';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LoginForm } from './components/accountBox/accountBox/loginForm';
 import { SignupForm } from './components/accountBox/accountBox/signupForm';
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import { AccountBox } from "./components/accountBox/accountBox";
+import "./App.css";
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -68,8 +69,7 @@ function App() {
         <div className='page-container'>
           <Routes>
             <Route path='/diary' element={<Diary />} />
-            <Route path='/login' element={<LoginForm />} />
-            <Route path='/login' element={<LoginForm />} />
+            <Route path='/login-signup' element={<AccountBox />} />
             <Route path='/' element={<VisionBoard />} />
           </Routes>
         </div>
