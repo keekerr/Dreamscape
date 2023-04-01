@@ -16,10 +16,10 @@ import Auth from '../../../utils/auth';
 
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
-  // const [userData, setUserData] = useState({ email: '', password: '' });
-  // const [validated] = useState(false);
+  const [userData, setUserData] = useState({ email: '', password: '' });
+  const [validated] = useState(false);
 
-  // const [loginUser] = useMutation(LOGIN_USER);
+  const [loginUser] = useMutation(LOGIN_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
