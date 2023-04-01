@@ -51,7 +51,7 @@ export const ADD_ENTRY = gql`
 `;
 
 export const EDIT_ENTRY = gql`
-    mutation editEntry($entryID: String!) {
+    mutation editEntry($entryID: ID!) {
         editEntry(entryID: $entryID) {
             _id
             username
@@ -66,7 +66,7 @@ export const EDIT_ENTRY = gql`
 `;
 
 export const REMOVE_ENTRY = gql`
-    mutation removeEntry($entryID: String!) {
+    mutation removeEntry($entryID: ID!) {
         removeEntry(entryID: $entryID) {
             _id
             username
