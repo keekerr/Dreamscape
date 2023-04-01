@@ -29,9 +29,6 @@ function NavBar() {
             <a className='nav-link text-light' href='login'>
               Login
             </a>
-            <a className='nav-link text-light text-align' href='signup'>
-              Signup
-            </a>
           </div>
         </div>
       </div>

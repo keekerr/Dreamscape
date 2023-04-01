@@ -6,6 +6,7 @@ import Auth from '../utils/auth';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
+
 // will need to edit this when unsplash is implemented
 const VisionBoard = () => {
     const [imageData, setImageData] = useState({ imageLink: '' });
@@ -59,16 +60,16 @@ const VisionBoard = () => {
 
     // function for moving image
 
-    // const moveImage = useCallback((dragIndex, hoverIndex) => {
-    //     setImages((prevImages) =>
-    //         update(prevImages, {
-    //             $splice: [
-    //                 [dragIndex, 1],
-    //                 [hoverIndex, 0, prevImages[dragIndex]],
-    //             ],
-    //         }),
-    //     ) 
-    // }, [])
+    const moveImage = useCallback((dragIndex, hoverIndex) => {
+        setImages((prevImages) =>
+            update(prevImages, {
+                $splice: [
+                    [dragIndex, 1],
+                    [hoverIndex, 0, prevImages[dragIndex]],
+                ],
+            }),
+        ) 
+    }, [])
 
     return (
     <DndProvider backend={HTML5Backend}>
