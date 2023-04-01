@@ -26,8 +26,8 @@ function NavBar() {
             <a className='nav-link text-light' href='visionboard'>
               Vision Board
             </a>
-            <a className='nav-link text-light' href='login'>
-              Login
+            <a className='nav-link text-light' href='login-signup'>
+              Login/Signup
             </a>
           </div>
         </div>
