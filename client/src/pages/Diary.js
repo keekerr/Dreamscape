@@ -71,7 +71,8 @@ const DiaryEntries = () => {
     return (
       <div>
         <h1 className='text-center m-5'>Welcome to your Diary</h1>
-        <form>
+        <form 
+            onSubmit={handleAddEntry}>
           <div className='mx-5'>
             <label form='exampleInputEmail1' className='form-label'>
             </label>
@@ -80,6 +81,7 @@ const DiaryEntries = () => {
               className='form-control'
               id='diary-title'
               placeholder='Enter title for Diary entry here...'
+              onChange={handleInputChange}
             />
             <div id='emailHelp' className='form-text'>
             </div>
@@ -92,6 +94,7 @@ const DiaryEntries = () => {
               id='diary-text'
               rows='3'
               placeholder='Enter text for Diary entry here...'
+              onChange={handleInputChange}
             ></textarea>
           </div>
           <button type='submit' className='btn btn-dark mx-5 my-2 px-4'>
