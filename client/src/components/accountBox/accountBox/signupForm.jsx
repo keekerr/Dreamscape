@@ -16,10 +16,10 @@ import { CREATE_USER } from '../../../utils/mutations';
 
 export function SignupForm(props) {
   const { switchToSignin } = useContext(AccountContext);
-  const [userData, setUserData] = useState({ username: '', email: '', password: '' });
-  const [validated] = useState(false);
+  // const [userData, setUserData] = useState({ username: '', email: '', password: '' });
+  // const [validated] = useState(false);
   
-  const [createUser] = useMutation(CREATE_USER);
+  // const [createUser] = useMutation(CREATE_USER);
 
   const handleInputChange = (event) => {
       const { name, value } = event.target;
