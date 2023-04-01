@@ -13,6 +13,7 @@ import { AccountContext } from "./accountContext";
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../../utils/mutations';
 import Auth from '../../../utils/auth';
+import { Form }  from 'react-bootstrap';
 
 export function LoginForm(props) {
   const { switchToSignup } = useContext(AccountContext);
@@ -54,19 +55,22 @@ export function LoginForm(props) {
 
   return (
     <BoxContainer>
-      <FormContainer 
-        // noValidate 
+      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+      {/* <FormContainer  */}
+        {/* // noValidate 
         // validated={validated} 
-        onSubmit={handleFormSubmit}>
+        // onSubmit={handleFormSubmit}> */}
         <Input 
+          name='email'
           type="email" 
           placeholder="Email"
           onChange={handleInputChange} />
         <Input 
+          name='password'
           type="password" 
           placeholder="Password"
           onChange={handleInputChange} />
-      </FormContainer>
+      {/* </FormContainer> */}
       <Marginer direction="vertical" margin={10} />
       <MutedLink href="#">Forget your password?</MutedLink>
       <Marginer direction="vertical" margin="1.6em" />
@@ -76,10 +80,11 @@ export function LoginForm(props) {
       <Marginer direction="vertical" margin="1em" />
       <MutedLink href="#">
         Don't have an accoun?{" "}
-        <BoldLink href="signup" onClick={switchToSignup}>
+        <BoldLink href="#" onClick={switchToSignup}>
           Signup
         </BoldLink>
       </MutedLink>
+      </Form>
     </BoxContainer>
   );
 }

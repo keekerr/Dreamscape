@@ -32,18 +32,18 @@ const client = new ApolloClient({
 });
 
 function App() {
-  // const [query, setQuery] = useState('');
-  // const [photos, setPhotos] = useState([]);
+  const [query, setQuery] = useState('');
+  const [photos, setPhotos] = useState([]);
 
-  // const handleSearch = useCallback(async () => {
-  //   try {
-  //     const response = await fetch(`/api/unsplash?query=${query}`);
-  //     const data = await response.json();
-  //     setPhotos(data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }, [query]);
+  const handleSearch = useCallback(async () => {
+    try {
+      const response = await fetch(`/api/unsplash?query=${query}`);
+      const data = await response.json();
+      setPhotos(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [query]);
 
   // const trackDownload = useCallback(async (photo) => {
   //   try {
