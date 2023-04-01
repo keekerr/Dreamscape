@@ -22,11 +22,11 @@ function NavBar() {
         <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
 
           <div className='navbar-nav'>
-            <Link className='nav-link text-light' aria-current='page' to='/diary'>
-              Diary
-            </Link>
             <Link className='nav-link text-light' to='/visionboard'>
               Vision Board
+            </Link>
+            <Link className='nav-link text-light' aria-current='page' to='/diary'>
+              Diary
             </Link>
             {Auth.loggedIn() ? (
                 <>
