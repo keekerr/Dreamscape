@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Auth from '../utils/auth';
 
 function NavBar() {
   return (
@@ -27,9 +28,15 @@ function NavBar() {
             <Link className='nav-link text-light' to='/visionboard'>
               Vision Board
             </Link>
-            <Link className='nav-link text-light' to='/login-signup'>
-              Login/Signup
-            </Link>
+            {Auth.loggedIn() ? (
+                <>
+                  <Link className='nav-link text-light' onClick={Auth.logout}>Logout</Link>
+                </>
+              ) : (
+                <Link className='nav-link text-light' to='/login-signup'>
+                  Login/Signup
+                </Link>
+              )}
           </div>
         </div>
       </div>
