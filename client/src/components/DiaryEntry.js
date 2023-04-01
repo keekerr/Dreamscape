@@ -1,13 +1,19 @@
 import React from 'react';
 
-function DiaryEntry() {
+function DiaryEntry({ entry, handleRemoveEntry }) {
+  console.log(entry.entryID)
   return (
-    <div className='card bg-dark-subtle m-5'>
-      <div className='card-header'>Featured</div>
+    <div className='card bg-dark-subtle m-5' key={entry._id}>
+      <div className='card-header'>{entry.title}</div>
       <div className='card-body'>
-        <p className='card-text'>
-          With supporting text below as a natural lead-in to additional content.
-        </p>
+        <p className='card-text'>{entry.entry}</p>
+        <button
+          type='button'
+          className='btn btn-danger'
+          onClick={() => handleRemoveEntry(entry.entryID)}
+        >
+          Remove
+        </button>
       </div>
     </div>
   );

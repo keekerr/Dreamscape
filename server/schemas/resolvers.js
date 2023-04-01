@@ -84,17 +84,15 @@ const resolvers = {
         },
         removeEntry: async (parent, { entryID }, context) => {
             if (context.user) {
-                const updatedUser = await User.findOneAndUpdate(
-
-                    { _id: context.user._id },
-                    { $pull: { savedEntries: { entryID } } },
-                    { new: true }
-                )
-
-                return updatedUser
+              const updatedUser = await User.findOneAndUpdate(
+                { _id: context.user._id },
+                { $pull: { diaryEntries: { entryID } } },
+                { new: true }
+              );
+              return updatedUser;
             }
-            throw new AuthenticationError("You must be logged in to use this feature.")
-        },
+            throw new AuthenticationError("You must be logged in to use this feature.");
+          },
         addImage: async (parent, { imageID }, context) => {
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
