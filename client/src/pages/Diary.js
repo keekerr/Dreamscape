@@ -11,13 +11,11 @@ console.log(window.React1 === window.React2);
 const DiaryEntries = () => {
     const [formData, setFormData] = useState({ title: '', entry: '' });
     const { data, error } = useQuery(GET_USER);
-    console.log(error)
     const [addEntry] = useMutation(ADD_ENTRY);
     const [editEntry] = useMutation(EDIT_ENTRY);
     const [removeEntry] = useMutation(REMOVE_ENTRY);
 
     const userDiaryData = data?.user.diaryEntries;
-    console.log(userDiaryData);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -26,7 +24,6 @@ const DiaryEntries = () => {
 
     const handleAddEntry = async () => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
-
         if (!token) {
             return false;
         }
@@ -37,25 +34,27 @@ const DiaryEntries = () => {
             });
         } catch (err) {
             console.error(err);
+            console.log('not logged in')
         }
     }
 
     // not confident in this...
-    const handleEditEntry = async () => {
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
+    // Commenting this out since we probably won't have time to implement it
+    // const handleEditEntry = async () => {
+    //     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-        if (!token) {
-            return false;
-        }
+    //     if (!token) {
+    //         return false;
+    //     }
 
-        try {
-            await editEntry({
-                variables: { input: { ...formData } }
-            });
-        } catch (err) {
-            console.error(err);
-        }
-    };
+    //     try {
+    //         await editEntry({
+    //             variables: { input: { ...formData } }
+    //         });
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // };
 
     const handleRemoveEntry = async (entryID) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -82,19 +81,21 @@ const DiaryEntries = () => {
             <label form='exampleInputEmail1' className='form-label'>
             </label>
             <input
+              name='title'
               type='text'
               className='form-control'
               id='diary-title'
               placeholder='Enter title for Diary entry here...'
               onChange={handleInputChange}
             />
-            <div id='emailHelp' className='form-text'>
-            </div>
+            {/* <div id='emailHelp' className='form-text'>
+            </div> */}
           </div>
           <div className='mx-5'>
             <label form='exampleFormControlTextarea1' className='form-label'>
             </label>
             <textarea
+              name='entry'
               className='form-control'
               id='diary-text'
               rows='3'
