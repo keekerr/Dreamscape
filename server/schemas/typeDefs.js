@@ -71,7 +71,6 @@ const typeDefs = gql`
             entryID: ID!
         ): User
         removeEntry(
-            _id: ID!
             entryID: ID!
         ): User
         addImage(

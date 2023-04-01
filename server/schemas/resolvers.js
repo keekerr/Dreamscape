@@ -2,7 +2,6 @@ const { User, VisionBoard, Diary } = require('../models');
 const { signToken } = require('../utils/auth');
 const { AuthenticationError } = require('apollo-server-express');
 const { request, gql } = require('graphql-request');
-const { ObjectId } = require('mongoose');
 
 const resolvers = {
     Query: {
@@ -83,12 +82,11 @@ const resolvers = {
             }
             throw new AuthenticationError("You must be logged in to use this feature.")
         },
-        removeEntry: async (parent, { input }, context) => {
-            const { entryID } = input;
+        removeEntry: async (parent, { entryID }, context) => {
             if (context.user) {
               const updatedUser = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $pull: { diaryEntries: { entryID: ObjectId(entryID) } } },
+                { $pull: { diaryEntries: { entryID } } },
                 { new: true }
               );
               return updatedUser;
