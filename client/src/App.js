@@ -69,7 +69,7 @@ function App() {
         <div className='page-container'>
           <Routes>
             <Route path='/diary' element={<Diary />} />
-            <Route path='/' element={<VisionBoard />} />
+            <Route path='/visionboard' element={<VisionBoard />} />
             <Route path='/login-signup' element={<AccountBox />} />
           </Routes>
         </div>
