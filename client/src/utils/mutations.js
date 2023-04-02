@@ -94,8 +94,8 @@ export const ADD_IMAGE = gql`
 `;
 
 export const REMOVE_IMAGE = gql`
-    mutation removeImage($imageLink: String!) {
-        removeImage(imageLink: $imageLink) {
+    mutation removeImage($imageID: ID!) {
+        removeImage(imageID: $imageID) {
             _id
             username
             images {

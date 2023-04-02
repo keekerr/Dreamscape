@@ -27,8 +27,7 @@ const VisionBoard = () => {
     const [removeImage] = useMutation(REMOVE_IMAGE);
     const [image, setImage] = useState(null);
 
-    const visionBoardData = data?.user.images;
-    console.log(visionBoardData)
+    const visionBoardData = data?.user || [];
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -114,7 +113,6 @@ const VisionBoard = () => {
             }),
         ) 
     }, [])
-    console.log(searchedImages)
     return (
     <DndProvider backend={HTML5Backend}>
       <div>
@@ -163,11 +161,27 @@ const VisionBoard = () => {
           })}
         </Row>
       </Container>
+      <Container>
+        <Row>
+          {visionBoardData.images.map((images) => {
+            return (
+              <Col md="4">
+                <Card key={images.imageLink} border='dark'>
+                  {images.imageLink ? (
+                    <Card.Img src={images.imageLink} alt={`${images.description}`} variant='top' />
+                  ) : null}
+                      <Button
+                        className='btn btn-dark mx-5 my-2 px-4'
+                        onClick={() => handleRemoveImage(images.imageID)}>
+                        Remove image
+                      </Button>
+                </Card>
+              </Col>
+            );
+          })}
+        </Row>
+      </Container>
     </DndProvider>)
-
-    function newFunction() {
-
-    }
 }
 
 export default VisionBoard;
