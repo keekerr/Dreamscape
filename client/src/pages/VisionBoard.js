@@ -25,8 +25,10 @@ const VisionBoard = () => {
     const [searchedImages, setSearchedImages] = useState([]);
     const [addImage] = useMutation(ADD_IMAGE);
     const [removeImage] = useMutation(REMOVE_IMAGE);
+    const [image, setImage] = useState(null);
 
     const visionBoardData = data?.user.images;
+    console.log(visionBoardData)
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -61,7 +63,9 @@ const VisionBoard = () => {
         }
       };
 
-    const handleAddImage = async () => {
+    const handleAddImage = async (imageLink) => {
+      
+        const saveImage = searchedImages.find((image) => image.imageLink === imageLink);
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
         if (!token) {
@@ -70,8 +74,9 @@ const VisionBoard = () => {
 
         try {
             await addImage({
-                variables: { input: { ...imageData } }
+              variables: { input: { imageLink: saveImage.imageLink } }
             });
+            setImage(saveImage);
         } catch (err) {
             console.error(err);
         }
@@ -109,7 +114,7 @@ const VisionBoard = () => {
             }),
         ) 
     }, [])
-
+    console.log(searchedImages)
     return (
     <DndProvider backend={HTML5Backend}>
       <div>
@@ -142,9 +147,16 @@ const VisionBoard = () => {
               <Col md="4">
                 <Card key={images.description} border='dark'>
                   {images.description ? (
-                    <Card.Img src={images.imageLink} alt={`The cover for ${images.description}`} variant='top' />
+                    <Card.Img src={images.imageLink} alt={`${images.description}`} variant='top' />
                   ) : null}
-                  
+                      <Button
+                        disabled={image?.imageLink === images.imageLink}
+                        className='btn btn-dark mx-5 my-2 px-4'
+                        onClick={() => handleAddImage(images.imageLink)}>
+                        {image?.imageLink === images.imageLink
+                          ? 'Image added'
+                          : 'Add image to your Vision Board'}
+                      </Button>
                 </Card>
               </Col>
             );
