@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import Auth from '../utils/auth';
 
 function NavBar() {
   return (
@@ -18,15 +20,21 @@ function NavBar() {
         </button>
         <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
           <div className='navbar-nav'>
-            <a className='nav-link mx-2' aria-current='page' href='diary'>
-              Diary
-            </a>
-            <a className='nav-link mx-2' aria-current='page' href='/'>
+            <Link className='nav-link text-light' to='/visionboard'>
               Vision Board
-            </a>
-            <a className='nav-link mx-2' aria-current='page' href='login-signup'>
-              Login/Signup
-            </a>
+            </Link>
+            <Link className='nav-link text-light' aria-current='page' to='/diary'>
+              Diary
+            </Link>
+            {Auth.loggedIn() ? (
+                <>
+                  <Link className='nav-link' onClick={Auth.logout}>Logout</Link>
+                </>
+              ) : (
+                <Link className='nav-link text-light' to='/login-signup'>
+                  Login/Signup
+                </Link>
+              )}
           </div>
         </div>
       </div>

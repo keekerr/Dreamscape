@@ -1,7 +1,6 @@
 import React from 'react';
 
 function DiaryEntry({ entry, handleRemoveEntry }) {
-  console.log(entry.entryID)
   return (
     <div className='card bg-dark-subtle m-5' key={entry._id}>
       <div className='card-header'>{entry.title}</div>

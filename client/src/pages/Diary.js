@@ -24,7 +24,7 @@ const DiaryEntries = () => {
         return <h2>LOADING...</h2>;
       }
 
-    const userData = data?.user.diaryEntries || {};
+    const userData = data?.user.diaryEntries || [];
 
 
     const handleInputChange = (event) => {
