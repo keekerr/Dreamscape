@@ -20,10 +20,10 @@ function NavBar() {
         </button>
         <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
           <div className='navbar-nav'>
-            <Link className='nav-link text-light' to='/visionboard'>
+            <Link className='nav-link' to='/visionboard'>
               Vision Board
             </Link>
-            <Link className='nav-link text-light' aria-current='page' to='/diary'>
+            <Link className='nav-link' aria-current='page' to='/diary'>
               Diary
             </Link>
             {Auth.loggedIn() ? (
@@ -31,7 +31,7 @@ function NavBar() {
                   <Link className='nav-link' onClick={Auth.logout}>Logout</Link>
                 </>
               ) : (
-                <Link className='nav-link text-light' to='/login-signup'>
+                <Link className='nav-link' to='/login-signup'>
                   Login/Signup
                 </Link>
               )}
