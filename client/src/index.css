@@ -1,14 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap");
 
+:root {
+  --lightblue: #c5d3ff;
+  --darkblue: #b8c9ff;
+  --darkerblue: #97afff;
+  --shadow: rgb(155, 155, 155);
+
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
 html,
 body {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
+  background-color: var(--lightblue);
 }
 
 * {
   box-sizing: border-box;
+  
 }
 
 body {
@@ -25,7 +40,33 @@ code {
     monospace;
 }
 
-#root {
-  width: 100%;
-  height: 100%;
+.navbar {
+  background-color: var(--darkblue);
+  box-shadow: 0px 10px 5px -3px var(--shadow);
+  border-radius: 5px 0px;
 }
+
+.nav-link {
+  text-align: center;
+  border-radius: 10px;
+  min-width: 150px;
+  transition: background-color .5s ease;
+}
+
+.nav-link:hover {
+  box-shadow: 3px 5px 10px -5px var(--shadow);
+}
+
+.nav-link:active,
+.nav-link:visited
+{
+  background-color: var(--darkerblue);
+  box-shadow: inset 3px 5px 10px -5px var(--shadow);
+}
+
+
+
+
+
+
+

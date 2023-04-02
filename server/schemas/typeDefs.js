@@ -20,7 +20,6 @@ const typeDefs = gql`
         title: String!
         entry: String!
         createdAt: String
-
     }
 
     input DiaryInput {
@@ -29,9 +28,8 @@ const typeDefs = gql`
     }
     
     input VisionBoardInput {
-        imageID: ID!
+        imageID: ID
         imageLink: String
-
     }
 
     type Auth {

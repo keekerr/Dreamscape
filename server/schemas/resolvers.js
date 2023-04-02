@@ -93,11 +93,11 @@ const resolvers = {
             }
             throw new AuthenticationError("You must be logged in to use this feature.");
           },
-        addImage: async (parent, { imageID }, context) => {
+        addImage: async (parent, { input }, context) => {
             if (context.user) {
                 const updatedUser = await User.findOneAndUpdate(
                     { _id: context.user._id },
-                    { $push: { images: imageID } },
+                    { $push: { images: input } },
                     { new: true }
                 )
 
