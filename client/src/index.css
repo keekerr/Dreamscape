@@ -64,6 +64,37 @@ code {
   box-shadow: inset 3px 5px 10px -5px var(--shadow);
 }
 
+.img-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* create 2 columns with equal width */
+  grid-gap: 10px; /* add a gap of 10px between the grid items */
+}
+
+.img-item {
+  width: 100%;
+}
+
+.modal-header {
+  background-color: var(--darkblue);
+}
+
+.modal-body {
+  box-shadow: 0px 10px 5px -3px var(--shadow);
+}
+
+
+.custom-btn {
+  background-color: var(--darkerblue);
+  border-color: var(--darkerblue);
+  color: black;
+}
+
+.custom-modal, .modal-dialog {
+  width: 70%;
+  max-width: 70%;
+}
+
+
 
 
 

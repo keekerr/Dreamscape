@@ -11,11 +11,11 @@ import {
     Form,
     Button,
     Card,
-    Row
+    Row,
+    Modal,
   } from 'react-bootstrap';
 import { searchImages } from '../utils/API'
-
-
+import ImageModal from '../components/ImageModal';
 
 // will need to edit this when unsplash is implemented
 const VisionBoard = () => {
@@ -116,6 +116,7 @@ const VisionBoard = () => {
     return (
     <DndProvider backend={HTML5Backend}>
       <div>
+          
           <h1 className='text-center m-5'>Search for an Image to add to your Vision Board</h1>
           <Form className='mx-5' onSubmit={handleFormSubmit}>
             <Row>
@@ -130,9 +131,7 @@ const VisionBoard = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type='submit' variant='success' size='lg' className='btn btn-dark mx-5 my-2 px-4'>
-                  Submit
-                </Button>
+              <ImageModal />
               </Col>
             </Row>
           </Form>
