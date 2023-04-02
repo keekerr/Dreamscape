@@ -2,10 +2,9 @@ import React from 'react';
 
 function NavBar() {
   return (
-    <nav className='navbar navbar-expand-lg bg-dark'>
-      <div className='container-fluid p-1 px-3'>
-        <a className='navbar-brand text-light' href='/'>DREAMSCAPE</a>
-
+    <nav className='navbar navbar-expand-lg custom-navbar'>
+      <div className='container-fluid p-1'>
+        <img className='navbar-brand' src='./images/logotextonly.png' height={75} />
         <button
           className='navbar-toggler'
           type='button'
@@ -18,23 +17,20 @@ function NavBar() {
           <span className='navbar-toggler-icon'></span>
         </button>
         <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
-
           <div className='navbar-nav'>
-            <a className='nav-link text-light' aria-current='page' href='diary'>
+            <a className='nav-link mx-2' aria-current='page' href='diary'>
               Diary
             </a>
-            <a className='nav-link text-light' href='visionboard'>
+            <a className='nav-link mx-2' aria-current='page' href='/'>
               Vision Board
             </a>
-            <a className='nav-link text-light' href='login-signup'>
+            <a className='nav-link mx-2' aria-current='page' href='login-signup'>
               Login/Signup
             </a>
           </div>
         </div>
       </div>
     </nav>
-    
-
   );
 }
 
