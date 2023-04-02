@@ -4,10 +4,9 @@ import Auth from '../utils/auth';
 
 function NavBar() {
   return (
-    <nav className='navbar navbar-expand-lg bg-dark'>
-      <div className='container-fluid p-1 px-3'>
-        <Link className='navbar-brand text-light' to='/'>DREAMSCAPE</Link>
-
+    <nav className='navbar navbar-expand-lg custom-navbar'>
+      <div className='container-fluid p-1'>
+        <img className='navbar-brand' src='./images/logotextonly.png' height={75} />
         <button
           className='navbar-toggler'
           type='button'
@@ -20,7 +19,6 @@ function NavBar() {
           <span className='navbar-toggler-icon'></span>
         </button>
         <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
-
           <div className='navbar-nav'>
             <Link className='nav-link text-light' to='/visionboard'>
               Vision Board
@@ -30,7 +28,7 @@ function NavBar() {
             </Link>
             {Auth.loggedIn() ? (
                 <>
-                  <Link className='nav-link text-light' onClick={Auth.logout}>Logout</Link>
+                  <Link className='nav-link' onClick={Auth.logout}>Logout</Link>
                 </>
               ) : (
                 <Link className='nav-link text-light' to='/login-signup'>

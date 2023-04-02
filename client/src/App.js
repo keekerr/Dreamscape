@@ -79,7 +79,7 @@ function App() {
           <Routes>
             <Route path='/*' element={<Navigate replace to="/visionboard" />} />
             <Route path='/diary' element={<Diary />} />
-            <Route path='/visionboard' element={<VisionBoard />} />
+            <Route path='/' element={<VisionBoard />} />
             <Route path='/login-signup' element={<AccountBox />} />
           </Routes>
         </AppContainer>
