@@ -26,6 +26,7 @@ const VisionBoard = () => {
     const [addImage] = useMutation(ADD_IMAGE);
     const [removeImage] = useMutation(REMOVE_IMAGE);
     const [image, setImage] = useState(null);
+    const [showModal, setShowModal] = useState(false);
 
     const visionBoardData = data?.user || [];
 
@@ -57,29 +58,30 @@ const VisionBoard = () => {
     
           setSearchedImages(imageData);
           setSearchInput('');
+          setShowModal(true);
         } catch (err) {
           console.error(err);
         }
       };
 
-    const handleAddImage = async (imageLink) => {
+    // const handleAddImage = async (imageLink) => {
       
-        const saveImage = searchedImages.find((image) => image.imageLink === imageLink);
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
+    //     const saveImage = searchedImages.find((image) => image.imageLink === imageLink);
+    //     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-        if (!token) {
-            return false;
-        }
+    //     if (!token) {
+    //         return false;
+    //     }
 
-        try {
-            await addImage({
-              variables: { input: { imageLink: saveImage.imageLink } }
-            });
-            setImage(saveImage);
-        } catch (err) {
-            console.error(err);
-        }
-    }
+    //     try {
+    //         await addImage({
+    //           variables: { input: { imageLink: saveImage.imageLink } }
+    //         });
+    //         setImage(saveImage);
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // }
 
     const handleRemoveImage = async (imageID) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -113,6 +115,7 @@ const VisionBoard = () => {
             }),
         ) 
     }, [])
+
     return (
     <DndProvider backend={HTML5Backend}>
       <div>
@@ -131,15 +134,20 @@ const VisionBoard = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-              <ImageModal />
+              <Button type='submit' variant='success' size='lg' className='btn btn-dark mx-5 my-2 px-4'>
+                Submit
+              </Button>
               </Col>
             </Row>
           </Form>
+          <Modal show={showModal} onHide={() => setShowModal(false)}>
+            <ImageModal searchedImages={searchedImages} />
+        </Modal>
       </div>
 
-      <Container>
-        <Row>
-          {searchedImages.map((images) => {
+      {/* <Container>
+        <Row> */}
+          {/* {searchedImages.map((images) => {
             return (
               <Col md="4">
                 <Card key={images.description} border='dark'>
@@ -157,9 +165,9 @@ const VisionBoard = () => {
                 </Card>
               </Col>
             );
-          })}
-        </Row>
-      </Container>
+          })} */}
+        {/* </Row>
+      </Container> */}
       <Container>
         <Row>
           {visionBoardData.images.map((images) => {
