@@ -19,21 +19,13 @@ import ImageModal from '../components/ImageModal';
 
 // will need to edit this when unsplash is implemented
 const VisionBoard = () => {
-    const [imageData, setImageData] = useState({ imageLink: '' });
+    // const [imageData, setImageData] = useState({ imageLink: '' });
     const { data } = useQuery(GET_USER);
     const [searchInput, setSearchInput] = useState('');
     const [searchedImages, setSearchedImages] = useState([]);
-    const [addImage] = useMutation(ADD_IMAGE);
     const [removeImage] = useMutation(REMOVE_IMAGE);
-    const [image, setImage] = useState(null);
-
-    const visionBoardData = data?.user.images;
-    console.log(visionBoardData)
-
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setImageData({ ...imageData, [name]: value });
-    };
+    const [showModal, setShowModal] = useState(false);
+    const visionBoardData = data?.user || {};
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -58,29 +50,30 @@ const VisionBoard = () => {
     
           setSearchedImages(imageData);
           setSearchInput('');
+          setShowModal(true);
         } catch (err) {
           console.error(err);
         }
       };
 
-    const handleAddImage = async (imageLink) => {
+    // const handleAddImage = async (imageLink) => {
       
-        const saveImage = searchedImages.find((image) => image.imageLink === imageLink);
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
+    //     const saveImage = searchedImages.find((image) => image.imageLink === imageLink);
+    //     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-        if (!token) {
-            return false;
-        }
+    //     if (!token) {
+    //         return false;
+    //     }
 
-        try {
-            await addImage({
-              variables: { input: { imageLink: saveImage.imageLink } }
-            });
-            setImage(saveImage);
-        } catch (err) {
-            console.error(err);
-        }
-    }
+    //     try {
+    //         await addImage({
+    //           variables: { input: { imageLink: saveImage.imageLink } }
+    //         });
+    //         setImage(saveImage);
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // }
 
     const handleRemoveImage = async (imageID) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -114,7 +107,7 @@ const VisionBoard = () => {
             }),
         ) 
     }, [])
-    console.log(searchedImages)
+
     return (
     <DndProvider backend={HTML5Backend}>
       <div>
@@ -133,28 +126,29 @@ const VisionBoard = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-              <ImageModal />
+              <Button type='submit' variant='success' size='lg' className='btn btn-dark mx-5 my-2 px-4'>
+                Submit
+              </Button>
               </Col>
             </Row>
           </Form>
+          <Modal show={showModal} onHide={() => setShowModal(false)}>
+            <ImageModal searchedImages={searchedImages} />
+        </Modal>
       </div>
-
       <Container>
         <Row>
-          {searchedImages.map((images) => {
+          {visionBoardData.images && visionBoardData.images.map((images) => {
             return (
               <Col md="4">
-                <Card key={images.description} border='dark'>
-                  {images.description ? (
+                <Card key={images.imageLink} border='dark'>
+                  {images.imageLink ? (
                     <Card.Img src={images.imageLink} alt={`${images.description}`} variant='top' />
                   ) : null}
                       <Button
-                        disabled={image?.imageLink === images.imageLink}
                         className='btn btn-dark mx-5 my-2 px-4'
-                        onClick={() => handleAddImage(images.imageLink)}>
-                        {image?.imageLink === images.imageLink
-                          ? 'Image added'
-                          : 'Add image to your Vision Board'}
+                        onClick={() => handleRemoveImage(images.imageID)}>
+                        Remove image
                       </Button>
                 </Card>
               </Col>
@@ -163,10 +157,6 @@ const VisionBoard = () => {
         </Row>
       </Container>
     </DndProvider>)
-
-    function newFunction() {
-
-    }
 }
 
 export default VisionBoard;
