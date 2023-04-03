@@ -43,8 +43,9 @@ code {
 .navbar {
   background-color: var(--darkblue);
   box-shadow: 0px 10px 5px -3px var(--shadow);
-  border-radius: 5px 0px;
+  border-radius: 0px 0px 5px 5px;
 }
+
 
 .nav-link {
   text-align: center;
@@ -57,12 +58,12 @@ code {
   box-shadow: 3px 5px 10px -5px var(--shadow);
 }
 
-.nav-link:active,
-.nav-link:visited
+.nav-link:active
 {
   background-color: var(--darkerblue);
   box-shadow: inset 3px 5px 10px -5px var(--shadow);
 }
+
 
 .img-container {
   display: grid;
@@ -93,6 +94,11 @@ code {
   width: 70%;
   max-width: 70%;
 }
+
+.custom-link {
+  text-decoration: none;
+}
+
 
 
 
