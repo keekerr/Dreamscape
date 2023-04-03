@@ -20,9 +20,9 @@ function ImageModal({ searchedImages }) {
 
   const handleClose = () => setShow(false);
   
-
+  // Adds imageLink to db so it can be rendered as a image on the user's vision board   
   const handleAddImage = async (imageLink) => {
-      
+    // This is built this way to check if the user has already saved the image    
     const saveImage = searchedImages.find((image) => image.imageLink === imageLink);
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
