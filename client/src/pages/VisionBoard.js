@@ -1,11 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import update from 'immutability-helper';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USER } from '../utils/queries';
 import { ADD_IMAGE, REMOVE_IMAGE } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { DndProvider } from 'react-dnd';
+import { DndProvider, useDrag, useDrop, Draggable } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { useDrag } from 'react-dnd';
 import {
   Container,
   Col,
@@ -27,7 +27,42 @@ const VisionBoard = () => {
   const [removeImage] = useMutation(REMOVE_IMAGE);
   const [showModal, setShowModal] = useState(false);
   const visionBoardData = data?.user || {};
+  const [image, setImage] = useState({});
 
+  const moveImage = useCallback(
+    (id, left, top) => {
+      setImage(
+        update(image, {
+          [id]: {
+            $merge: { left, top },
+          },
+        }),
+      )
+    },
+    [image, setImage],
+  )
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: 'image',
+    item: { id: image.id },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  }));
+
+  const [, drop] = useDrop(
+    () => ({
+      accept: 'image',
+      drop(item, monitor) {
+        const delta = monitor.getDifferenceFromInitialOffset()
+        const left = Math.round(item.left + delta.x)
+        const top = Math.round(item.top + delta.y)
+        moveImage(item.imageID, left, top)
+        return undefined
+      },
+    }),
+    [moveImage],
+  )
+    
   // handleFormSubmit queries Unsplash API using the searchInput state, and returns the images in the ImageModal
   // It also clears the searchInput state, and takes the data returned from searchImages and passes it into setSearchedImages    
   const handleFormSubmit = async (event) => {
@@ -100,21 +135,22 @@ const VisionBoard = () => {
 
   // function for moving image
 
-  const moveImage = useCallback((dragIndex, hoverIndex) => {
-    setImages((prevImages) =>
-      update(prevImages, {
-        $splice: [
-          [dragIndex, 1],
-          [hoverIndex, 0, prevImages[dragIndex]],
-        ],
-      }),
-    )
-  }, [])
-
+  // const moveImage = useCallback((dragIndex, hoverIndex) => {
+  //   setImages((prevImages) =>
+  //     update(prevImages, {
+  //       $splice: [
+  //         [dragIndex, 1],
+  //         [hoverIndex, 0, prevImages[dragIndex]],
+  //       ],
+  //     }),
+  //   )
+  // }, [])
+  if (isDragging) {
+    return <div ref={drag} />
+  }
   return (
     <DndProvider backend={HTML5Backend}>
       <div>
-
         <h1 className='text-center m-5'>Search for an Image to add to your Vision Board</h1>
         <Form className='mx-5' onSubmit={handleFormSubmit}>
           <Row>
@@ -141,7 +177,7 @@ const VisionBoard = () => {
       </div>
       <Container>
         <Row>
-          {visionBoardData.images && visionBoardData.images.map((images) => {
+          {visionBoardData.images && visionBoardData.images.map((images, index) => {
             const [{ isDragging }, drag] = useDrag(() => ({
               type: 'image',
               item: { id: images.imageID },
@@ -151,7 +187,7 @@ const VisionBoard = () => {
             }));
 
             return (
-              <Col md="4">
+              <Col md="4" ref={drop}>
                 <div ref={drag}>
                   <Card key={images.imageLink} border='dark' style={{ opacity: isDragging ? 0.5 : 1 }}>
                     {images.imageLink ? (
