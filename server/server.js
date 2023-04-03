@@ -91,7 +91,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Serve the client's HTML file for all other requests
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
 
