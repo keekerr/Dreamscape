@@ -26,7 +26,9 @@ const VisionBoard = () => {
     const [removeImage] = useMutation(REMOVE_IMAGE);
     const [showModal, setShowModal] = useState(false);
     const visionBoardData = data?.user || {};
-
+    
+    // handleFormSubmit queries Unsplash API using the searchInput state, and returns the images in the ImageModal
+    // It also clears the searchInput state, and takes the data returned from searchImages and passes it into setSearchedImages    
     const handleFormSubmit = async (event) => {
         event.preventDefault();
     
@@ -74,7 +76,7 @@ const VisionBoard = () => {
     //         console.error(err);
     //     }
     // }
-
+    // Grabs the imageID from the selected image and removes it from the database, in turn removing it from page.
     const handleRemoveImage = async (imageID) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
