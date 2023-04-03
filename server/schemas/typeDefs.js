@@ -75,7 +75,6 @@ const typeDefs = gql`
             input: VisionBoardInput
         ): User
         removeImage(
-            _id: ID!
             imageID: ID!
         ): User
     }

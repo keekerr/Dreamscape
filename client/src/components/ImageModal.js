@@ -1,19 +1,47 @@
-import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import React, { useState, useEffect } from 'react';
+import {
+  Col,
+  Button,
+  Card,
+  Modal,
+  Row} from 'react-bootstrap';
+import { useMutation } from '@apollo/client';
+import Auth from '../utils/auth';
+import { ADD_IMAGE } from '../utils/mutations';
 
-function ImageModal() {
+function ImageModal({ searchedImages }) {
   const [show, setShow] = useState(false);
+  const [image, setImage] = useState(null);
+  const [addImage] = useMutation(ADD_IMAGE);
+  useEffect(() => {
+    setShow(true);
+  }, []);
+
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  
+
+  const handleAddImage = async (imageLink) => {
+      
+    const saveImage = searchedImages.find((image) => image.imageLink === imageLink);
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+        return false;
+    }
+
+    try {
+        await addImage({
+          variables: { input: { imageLink: saveImage.imageLink } }
+        });
+        setImage(saveImage);
+    } catch (err) {
+        console.error(err);
+    }
+}
 
   return (
     <>
-      <Button className='custom-btn' size='lg' onClick={handleShow}>
-        Search
-      </Button>
-
       <Modal show={show} onHide={handleClose} animation={true} >
         <Modal.Header closeButton>
           <Modal.Title>Search Results: </Modal.Title>
@@ -21,16 +49,27 @@ function ImageModal() {
         <Modal.Body>
           <div className='img-container'> 
           {/* Replace placeholders with the api res, or dont it could just be a cat website*/} 
-              <img src='http://placekitten.com/600' className='img-item' />
-              <img src='http://placekitten.com/600' className='img-item' />
-              <img src='http://placekitten.com/600' className='img-item' />
-              <img src='http://placekitten.com/600' className='img-item' />
-              <img src='http://placekitten.com/600' className='img-item' />
-              <img src='http://placekitten.com/600' className='img-item' />
-              <img src='http://placekitten.com/600' className='img-item' />
-              <img src='http://placekitten.com/600' className='img-item' />
-              <img src='http://placekitten.com/600' className='img-item' />
-              <img src='http://placekitten.com/600' className='img-item' />
+          {searchedImages.map((images) => {
+            return (
+              <Row>
+              <Col md="4">
+                <Card key={images.description} border='dark'>
+                  {images.description ? (
+                    <Card.Img src={images.imageLink} alt={`${images.description}`} variant='top' />
+                  ) : null}
+                      <Button
+                        disabled={image?.imageLink === images.imageLink}
+                        className='btn btn-dark mx-5 my-2 px-4'
+                        onClick={() => handleAddImage(images.imageLink)}>
+                        {image?.imageLink === images.imageLink
+                          ? 'Image added'
+                          : 'Add image to your Vision Board'}
+                      </Button>
+                </Card>
+              </Col>
+              </Row>
+            );
+          })}
             </div>
         </Modal.Body>
         <Modal.Footer>

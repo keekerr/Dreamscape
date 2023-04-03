@@ -1,45 +1,41 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Auth from '../utils/auth';
+import { Container, Navbar, Nav } from 'react-bootstrap';
 
 function NavBar() {
   return (
-    <nav className='navbar navbar-expand-lg custom-navbar'>
-      <div className='container-fluid p-1'>
-        <img className='navbar-brand' src='./images/logotextonly.png' height={75} />
-        <button
-          className='navbar-toggler'
-          type='button'
-          data-bs-toggle='collapse'
-          data-bs-target='#navbarNavAltMarkup'
-          aria-controls='navbarNavAltMarkup'
-          aria-expanded='false'
-          aria-label='Toggle navigation'
-        >
-          <span className='navbar-toggler-icon'></span>
-        </button>
-        <div className='collapse navbar-collapse' id='navbarNavAltMarkup'>
-          <div className='navbar-nav'>
-            <Link className='nav-link' to='/visionboard'>
-              Vision Board
-            </Link>
-            <Link className='nav-link' aria-current='page' to='/diary'>
-              Diary
-            </Link>
+    <Navbar className='navbar' collapseOnSelect expand='lg'>
+      <Container fluid>
+        <Navbar.Brand>
+          <img
+            className='navbar-brand'
+            src='./images/logotextonly.png'
+            height={75}
+          />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+        <Navbar.Collapse id='responsive-navbar-nav' className='justify-content-end'>
+          <Nav>
+            <Nav.Link href='/visionboard'>Vision Board</Nav.Link>
+            <Nav.Link href='/diary'>Diary</Nav.Link>
             {Auth.loggedIn() ? (
-                <>
-                  <Link className='nav-link' onClick={Auth.logout}>Logout</Link>
-                </>
-              ) : (
-                <Link className='nav-link' to='/login-signup'>
-                  Login/Signup
-                </Link>
-              )}
-          </div>
-        </div>
-      </div>
-    </nav>
+              <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
+            ) : (
+              <Link
+                className='nav-link'
+                to='/login-signup'
+                activeClassName='nav-link:active'
+              >
+                Login/Signup
+              </Link>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }
 
 export default NavBar;
+
