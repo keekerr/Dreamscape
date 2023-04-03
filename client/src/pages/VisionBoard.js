@@ -19,21 +19,13 @@ import ImageModal from '../components/ImageModal';
 
 // will need to edit this when unsplash is implemented
 const VisionBoard = () => {
-    const [imageData, setImageData] = useState({ imageLink: '' });
+    // const [imageData, setImageData] = useState({ imageLink: '' });
     const { data } = useQuery(GET_USER);
     const [searchInput, setSearchInput] = useState('');
     const [searchedImages, setSearchedImages] = useState([]);
-    const [addImage] = useMutation(ADD_IMAGE);
     const [removeImage] = useMutation(REMOVE_IMAGE);
-    const [image, setImage] = useState(null);
     const [showModal, setShowModal] = useState(false);
-
-    const visionBoardData = data?.user || [];
-
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setImageData({ ...imageData, [name]: value });
-    };
+    const visionBoardData = data?.user || {};
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -144,33 +136,9 @@ const VisionBoard = () => {
             <ImageModal searchedImages={searchedImages} />
         </Modal>
       </div>
-
-      {/* <Container>
-        <Row> */}
-          {/* {searchedImages.map((images) => {
-            return (
-              <Col md="4">
-                <Card key={images.description} border='dark'>
-                  {images.description ? (
-                    <Card.Img src={images.imageLink} alt={`${images.description}`} variant='top' />
-                  ) : null}
-                      <Button
-                        disabled={image?.imageLink === images.imageLink}
-                        className='btn btn-dark mx-5 my-2 px-4'
-                        onClick={() => handleAddImage(images.imageLink)}>
-                        {image?.imageLink === images.imageLink
-                          ? 'Image added'
-                          : 'Add image to your Vision Board'}
-                      </Button>
-                </Card>
-              </Col>
-            );
-          })} */}
-        {/* </Row>
-      </Container> */}
       <Container>
         <Row>
-          {visionBoardData.images.map((images) => {
+          {visionBoardData.images && visionBoardData.images.map((images) => {
             return (
               <Col md="4">
                 <Card key={images.imageLink} border='dark'>
