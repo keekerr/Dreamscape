@@ -142,18 +142,10 @@ const VisionBoard = () => {
       <Container>
         <Row>
           {visionBoardData.images && visionBoardData.images.map((images) => {
-            const [{ isDragging }, drag] = useDrag(() => ({
-              type: 'image',
-              item: { id: images.imageID },
-              collect: (monitor) => ({
-                isDragging: monitor.isDragging(),
-              }),
-            }));
-
             return (
               <Col md="4">
-                <div ref={drag}>
-                  <Card key={images.imageLink} border='dark' style={{ opacity: isDragging ? 0.5 : 1 }}>
+                <div>
+                  <Card key={images.imageLink} border='dark'>
                     {images.imageLink ? (
                       <Card.Img src={images.imageLink} alt={`${images.description}`} variant='top' />
                     ) : null}
