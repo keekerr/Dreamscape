@@ -1,3 +1,6 @@
+// Source https://www.framer.com/motion/
+// Source https://www.framer.com/motion/transition/
+
 import React, { useState } from "react";
 import styled from "styled-components";
 import { LoginForm } from "./loginForm";
