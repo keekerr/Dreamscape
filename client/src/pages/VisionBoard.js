@@ -16,6 +16,7 @@ import {
   Modal,
 } from 'react-bootstrap';
 import { searchImages } from '../utils/API'
+
 import ImageModal from '../components/ImageModal';
 
 // will need to edit this when unsplash is implemented
@@ -29,7 +30,7 @@ const VisionBoard = () => {
   const visionBoardData = data?.user || {};
 
   // handleFormSubmit queries Unsplash API using the searchInput state, and returns the images in the ImageModal
-  // It also clears the searchInput state, and takes the data returned from searchImages and passes it into setSearchedImages    
+  // It also clears the searchInput state, and takes the data returned from searchImages and passes it into setSearchedImages
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -48,7 +49,7 @@ const VisionBoard = () => {
 
       const imageData = photos.results.map((images) => ({
         description: images.alt_description,
-        imageLink: images.urls.regular
+        imageLink: images.urls.regular,
       }));
 
       setSearchedImages(imageData);
@@ -87,12 +88,12 @@ const VisionBoard = () => {
 
     try {
       await removeImage({
-        variables: { imageID }
+        variables: { imageID },
       });
     } catch (err) {
       console.error(err);
     }
-  }
+  };
 
   // array for images
 
@@ -107,63 +108,76 @@ const VisionBoard = () => {
           [dragIndex, 1],
           [hoverIndex, 0, prevImages[dragIndex]],
         ],
-      }),
-    )
-  }, [])
+      })
+    );
+  }, []);
 
   return (
     <DndProvider backend={HTML5Backend}>
       <div>
-
-        <h1 className='text-center m-5'>Search for an Image to add to your Vision Board</h1>
-        <Form className='mx-5' onSubmit={handleFormSubmit}>
-          <Row>
-            <Col xs={12} md={8}>
-              <Form.Control
-                name='searchInput'
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                type='text'
-                size='lg'
-                placeholder='Search for an Image'
-              />
-            </Col>
-            <Col xs={12} md={4}>
-              <Button type='submit' variant='success' size='lg' className='btn btn-dark mx-5 my-2 px-4'>
-                Submit
-              </Button>
-            </Col>
-          </Row>
-        </Form>
-        <Modal show={showModal} onHide={() => setShowModal(false)} animation={true}>
+        <Container className='d-flex justify-content-center'>
+          <Form onSubmit={handleFormSubmit} className='mb-5'>
+            <Row>
+              <Col xs={12} md={11}>
+                <Form.Control
+                  name='searchInput'
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  type='text'
+                  size='lg'
+                  placeholder='Search for an Image'
+                  className='mb-3'
+                />
+              </Col>
+              <Col xs={12} md={1}>
+                <Button
+                  type='submit'
+                  variant='success'
+                  size='lg'
+                  className='btn px-4 custom-btn'
+                >
+                  Submit
+                </Button>
+              </Col>
+            </Row>
+          </Form>
+        </Container>
+        <Modal show={showModal} onHide={() => setShowModal(false)}>
           <ImageModal searchedImages={searchedImages} />
         </Modal>
       </div>
-      <Container>
+      <Container className='mt-5 '>
         <Row>
-          {visionBoardData.images && visionBoardData.images.map((images) => {
-            return (
-              <Col md="4">
-                <div>
-                  <Card key={images.imageLink} border='dark'>
+          {visionBoardData.images &&
+            visionBoardData.images.map((images) => {
+              return (
+                <Col md='4'>
+                  <Card
+                    key={images.imageLink}
+                    border='dark'
+                    className='grabbable'
+                  >
                     {images.imageLink ? (
-                      <Card.Img src={images.imageLink} alt={`${images.description}`} variant='top' />
+                      <Card.Img
+                        src={images.imageLink}
+                        alt={`${images.description}`}
+                        variant='top'
+                      />
                     ) : null}
-                    <Button
-                      className='btn btn-dark mx-5 my-2 px-4'
-                      onClick={() => handleRemoveImage(images.imageID)}>
-                      Remove image
-                    </Button>
+                    <div
+                      className='btn-remove-image'
+                      onClick={() => handleRemoveImage(images.imageID)}
+                    >
+                      <i class='bi bi-trash'></i>
+                    </div>
                   </Card>
-                </div>
-              </Col>
-
-            );
-
-          })}
+                </Col>
+              );
+            })}
         </Row>
       </Container>
-    </DndProvider>)
-}
+    </DndProvider>
+  );
+};
 
 export default VisionBoard;
