@@ -9,7 +9,7 @@ import { useMutation } from '@apollo/client';
 import Auth from '../utils/auth';
 import { ADD_IMAGE } from '../utils/mutations';
 
-function ImageModal({ searchedImages }) {
+function MyImageModal({ searchedImages }) {
   const [show, setShow] = useState(false);
   const [image, setImage] = useState(null);
   const [addImage] = useMutation(ADD_IMAGE);
@@ -74,4 +74,4 @@ function ImageModal({ searchedImages }) {
   );
 }
 
-export default ImageModal;
+export default MyImageModal;
