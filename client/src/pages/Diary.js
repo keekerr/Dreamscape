@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USER } from '../utils/queries';
 import { ADD_ENTRY, EDIT_ENTRY, REMOVE_ENTRY } from '../utils/mutations';
@@ -8,12 +8,18 @@ import { Button, Modal } from 'react-bootstrap';
 import AddEntry from '../components/AddEntry';
 
 const DiaryEntries = () => {
-    const { loading, data } = useQuery(GET_USER);
+  const [showModal, setShowModal] = useState(false);
 
-    // const [editEntry] = useMutation(EDIT_ENTRY);
-    const [removeEntry] = useMutation(REMOVE_ENTRY);
+  useEffect(() => {
+    if (!Auth.loggedIn()) {
+      window.location.replace('http://localhost:3000/login-signup');
+    }
+  }, []);
 
-    const [showModal, setShowModal] = useState(false);
+  const { loading, data } = useQuery(GET_USER);
+
+  // const [editEntry] = useMutation(EDIT_ENTRY);
+  const [removeEntry] = useMutation(REMOVE_ENTRY);
 
     if (loading) {
         return <h2>LOADING...</h2>;

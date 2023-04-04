@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USER } from '../utils/queries';
 import { ADD_IMAGE, REMOVE_IMAGE } from '../utils/mutations';
@@ -28,6 +28,12 @@ const VisionBoard = () => {
   const [removeImage] = useMutation(REMOVE_IMAGE);
   const [showModal, setShowModal] = useState(false);
   const visionBoardData = data?.user || {};
+
+  useEffect(() => {
+    if (!Auth.loggedIn()) {
+      window.location.replace('http://localhost:3000/login-signup');
+    }
+  }, []);
 
   // handleFormSubmit queries Unsplash API using the searchInput state, and returns the images in the ImageModal
   // It also clears the searchInput state, and takes the data returned from searchImages and passes it into setSearchedImages
