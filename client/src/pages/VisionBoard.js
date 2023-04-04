@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USER } from '../utils/queries';
-import { ADD_IMAGE, REMOVE_IMAGE } from '../utils/mutations';
+import { REMOVE_IMAGE } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -19,9 +19,7 @@ import { searchImages } from '../utils/API'
 
 import ImageModal from '../components/ImageModal';
 
-// will need to edit this when unsplash is implemented
 const VisionBoard = () => {
-  // const [imageData, setImageData] = useState({ imageLink: '' });
   const { data } = useQuery(GET_USER);
   const [searchInput, setSearchInput] = useState('');
   const [searchedImages, setSearchedImages] = useState([]);
@@ -60,24 +58,6 @@ const VisionBoard = () => {
     }
   };
 
-  // const handleAddImage = async (imageLink) => {
-
-  //     const saveImage = searchedImages.find((image) => image.imageLink === imageLink);
-  //     const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-  //     if (!token) {
-  //         return false;
-  //     }
-
-  //     try {
-  //         await addImage({
-  //           variables: { input: { imageLink: saveImage.imageLink } }
-  //         });
-  //         setImage(saveImage);
-  //     } catch (err) {
-  //         console.error(err);
-  //     }
-  // }
   // Grabs the imageID from the selected image and removes it from the database, in turn removing it from page.
   const handleRemoveImage = async (imageID) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -94,23 +74,6 @@ const VisionBoard = () => {
       console.error(err);
     }
   };
-
-  // array for images
-
-
-
-  // function for moving image
-
-  const moveImage = useCallback((dragIndex, hoverIndex) => {
-    setImages((prevImages) =>
-      update(prevImages, {
-        $splice: [
-          [dragIndex, 1],
-          [hoverIndex, 0, prevImages[dragIndex]],
-        ],
-      })
-    );
-  }, []);
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -156,6 +119,7 @@ const VisionBoard = () => {
                     key={images.imageLink}
                     border='dark'
                     className='grabbable'
+                    style={{ marginBottom: "10px" }}
                   >
                     {images.imageLink ? (
                       <Card.Img

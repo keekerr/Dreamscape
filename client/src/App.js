@@ -56,20 +56,6 @@ function App() {
     }
   }, [query]);
 
-  // const trackDownload = useCallback(async (photo) => {
-  //   try {
-  //     await fetch('/api/unsplash/download', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify({ downloadLocation: photo.links.download_location }),
-  //     });
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }, []);
-
   return (
     <ApolloProvider client={client}>
     <Router>

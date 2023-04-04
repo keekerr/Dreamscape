@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USER } from '../utils/queries';
-import { ADD_ENTRY, EDIT_ENTRY, REMOVE_ENTRY } from '../utils/mutations';
+import { REMOVE_ENTRY } from '../utils/mutations';
 import Auth from '../utils/auth';
 import DiaryEntry from '../components/DiaryEntry';
 import { Button, Modal } from 'react-bootstrap';
@@ -9,8 +9,6 @@ import AddEntry from '../components/AddEntry';
 
 const DiaryEntries = () => {
     const { loading, data } = useQuery(GET_USER);
-
-    // const [editEntry] = useMutation(EDIT_ENTRY);
     const [removeEntry] = useMutation(REMOVE_ENTRY);
 
     const [showModal, setShowModal] = useState(false);
