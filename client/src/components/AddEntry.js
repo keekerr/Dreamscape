@@ -33,6 +33,9 @@ function AddEntry() {
         if (!token) {
             return false;
         }
+        if (!formData.title || !formData.entry) {
+          return false;
+        }
         try {
             await addEntry({
                 variables: { input: { ...formData } }
