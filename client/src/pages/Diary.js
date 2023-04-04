@@ -33,7 +33,6 @@ const DiaryEntries = () => {
 
     const handleRemoveEntry = async (entryID) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
-        console.log(entryID)
         if (!token) {
             return false;
         }
@@ -52,7 +51,12 @@ const DiaryEntries = () => {
 
     return (
       <div>
-        <h1 className='text-center m-5'>Welcome to your Diary</h1>
+        <h1 className='text-center mt-1 mb-3'>Welcome to your Diary</h1>
+          <Button 
+            onClick={handleButtonPush} 
+            className='btn mx-5 mb-5 px-4'
+            style={{ color: "white", backgroundColor: "#2eb499", borderColor: "#2eb499"}}
+            >Add Entry</Button>
         <Modal show={showModal} onHide={() => setShowModal(false)} backdrop="static" keyboard={false}>
           <AddEntry />
         </Modal>
@@ -65,11 +69,6 @@ const DiaryEntries = () => {
         />
         ))}
         </div>
-        <Button 
-          onClick={handleButtonPush} 
-          className='btn mx-5 my-2 px-4'
-          style={{ color: "white", backgroundColor: "#97afff"}}
-          >Add Entry</Button>
       </div>
 
       

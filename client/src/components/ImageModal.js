@@ -50,31 +50,26 @@ function ImageModal({ searchedImages }) {
           {searchedImages.map((images) => {
             return (
               <Row>
-              <Col md="4">
-                <Card key={images.description} border='dark'>
+                <Card key={images.description} border='0'>
                   {images.description ? (
                     <Card.Img src={images.imageLink} alt={`${images.description}`} variant='top' />
                   ) : null}
                       <Button
                         disabled={image?.imageLink === images.imageLink}
-                        className='btn btn-dark'
+                        className='img-btn'
+                        size='sm'
+                        variant='light'
                         onClick={() => handleAddImage(images.imageLink)}>
                         {image?.imageLink === images.imageLink
-                          ? 'Image added'
-                          : 'Add image to your Vision Board'}
+                          ? <i class="bi bi-check-square-fill"></i>
+                          : <i class="bi bi-plus-square-fill"></i>}
                       </Button>
                 </Card>
-              </Col>
               </Row>
             );
           })}
             </div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button className='custom-btn' size='lg' variant='primary' onClick={handleClose}>
-            Done
-          </Button>
-        </Modal.Footer>
     </>
   );
 }

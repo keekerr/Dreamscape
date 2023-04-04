@@ -33,6 +33,9 @@ function AddEntry() {
         if (!token) {
             return false;
         }
+        if (!formData.title || !formData.entry) {
+          return false;
+        }
         try {
             await addEntry({
                 variables: { input: { ...formData } }
@@ -80,7 +83,7 @@ function AddEntry() {
           <Button 
             type='submit' 
             className='btn mx-5 my-2 px-4' 
-            style={{ color: "white", backgroundColor: "#97afff"}}
+            style={{ color: "white", backgroundColor: "#2eb499", borderColor: "#2eb499"}}
             onClick={handleClose}>
             Submit
           </Button>
