@@ -56,7 +56,8 @@ function DiaryEntry({ entry, handleRemoveEntry }) {
 
 ## Important Links
 [GitHub Repository](https://github.com/keekerr/Dreamscape)
-[Deployed Application](http://dreamscape-vision-board.herokuapp.com/)
+
+[Deployed Application](http://dreamscape-vision-board.herokuapp.com/visionboard)
 
 ## Example Video
 [Enjoy This Short Video:)](https://drive.google.com/file/d/1cjWPfwrpUZUMPqbN6ao98PnK7LxGGVqR/view)

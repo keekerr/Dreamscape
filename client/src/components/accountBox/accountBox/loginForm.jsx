@@ -1,3 +1,8 @@
+// Source: https://www.pluralsight.com/guides/react-inline-styling
+// Source https://www.framer.com/motion/transition/
+// Source: https://www.bing.com/videos/riverview/relatedvideo?&q=framer+motion+transition&&mid=E6BC292FE16B5F810F75E6BC292FE16B5F810F75&&FORM=VRDGAR
+// Source: https://www.youtube.com/watch?v=cRmEbR8kjHQ&t=345s
+
 import React from 'react';
 import { useState, useContext } from 'react';
 import {
@@ -8,7 +13,7 @@ import {
   MutedLink,
   SubmitButton,
 } from "./common";
-import { Marginer } from "../../marginer";
+import { Margin } from "../../margin";
 import { AccountContext } from "./accountContext";
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../../utils/mutations';
