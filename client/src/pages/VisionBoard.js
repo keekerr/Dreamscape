@@ -135,7 +135,7 @@ const VisionBoard = () => {
             </Col>
           </Row>
         </Form>
-        <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal show={showModal} onHide={() => setShowModal(false)} animation={true}>
           <ImageModal searchedImages={searchedImages} />
         </Modal>
       </div>

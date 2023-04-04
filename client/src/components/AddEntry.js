@@ -45,7 +45,6 @@ function AddEntry() {
 
     return (
         <>
-        <Modal show={show} onHide={handleClose} animation={true}>
         <Modal.Header closeButton>
           <Modal.Title style={{ color: "white" }}>Add an Entry</Modal.Title>
         </Modal.Header>
@@ -64,8 +63,6 @@ function AddEntry() {
               value={formData.title}
               onChange={handleInputChange}
             />
-            {/* <div id='emailHelp' className='form-text'>
-            </div> */}
           </div>
           <div className='mx-5'>
             <label form='exampleFormControlTextarea1' className='form-label'>
@@ -80,12 +77,15 @@ function AddEntry() {
               onChange={handleInputChange}
             ></textarea>
           </div>
-          <Button type='submit' className='btn mx-5 my-2 px-4' style={{ color: "white", backgroundColor: "#97afff"}}>
+          <Button 
+            type='submit' 
+            className='btn mx-5 my-2 px-4' 
+            style={{ color: "white", backgroundColor: "#97afff"}}
+            onClick={handleClose}>
             Submit
           </Button>
         </form>
         </Modal.Body>
-        </Modal>
         </>
     )
 }

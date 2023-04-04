@@ -42,7 +42,6 @@ function ImageModal({ searchedImages }) {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose} animation={true}>
         <Modal.Header closeButton>
           <Modal.Title>Search Results: </Modal.Title>
         </Modal.Header>
@@ -80,7 +79,6 @@ function ImageModal({ searchedImages }) {
             Save
           </Button>
         </Modal.Footer>
-      </Modal>
     </>
   );
 }
