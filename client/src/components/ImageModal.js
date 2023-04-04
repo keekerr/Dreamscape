@@ -42,7 +42,7 @@ function ImageModal({ searchedImages }) {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose} animation={true} >
+      <Modal show={show} onHide={handleClose} animation={true}>
         <Modal.Header closeButton>
           <Modal.Title>Search Results: </Modal.Title>
         </Modal.Header>
