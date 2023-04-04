@@ -1,11 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
+import update from 'immutability-helper';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USER } from '../utils/queries';
 import { REMOVE_IMAGE } from '../utils/mutations';
 import Auth from '../utils/auth';
-import { DndProvider } from 'react-dnd';
+import { DndProvider, useDrag, useDrop, Draggable } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { useDrag, useDrop } from 'react-dnd';
+import { useDrag } from 'react-dnd';
 import {
   Container,
   Col,
