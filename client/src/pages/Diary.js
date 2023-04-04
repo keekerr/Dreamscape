@@ -25,7 +25,6 @@ const DiaryEntries = () => {
 
     const handleRemoveEntry = async (entryID) => {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
-        console.log(entryID)
         if (!token) {
             return false;
         }
