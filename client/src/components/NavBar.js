@@ -25,7 +25,7 @@ function NavBar() {
               <Link
                 className='nav-link'
                 to='/login-signup'
-                activeClassName='nav-link:active'
+                activeclassname='nav-link:active'
               >
                 Login/Signup
               </Link>
