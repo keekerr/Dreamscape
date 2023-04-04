@@ -13,7 +13,7 @@ const DiaryEntries = () => {
   useEffect(() => {
     if (!Auth.loggedIn()) {
       window.location.replace('http://localhost:3000/login-signup');
-    }
+    } 
   }, []);
 
   const { loading, data } = useQuery(GET_USER);
