@@ -47,7 +47,7 @@ const DiaryEntries = () => {
     return (
       <div>
         <h1 className='text-center m-5'>Welcome to your Diary</h1>
-        <Modal show={showModal} onHide={() => setShowModal(false)} animation={true}>
+        <Modal show={showModal} onHide={() => setShowModal(false)} backdrop="static" keyboard={false}>
           <AddEntry />
         </Modal>
         <div>
