@@ -9,8 +9,8 @@ function NavBar() {
       <Container fluid>
         <Navbar.Brand>
           <img
-            className='navbar-brand'
-            src='./images/logotextonly.png'
+            className='navbar-brand mx-3'
+            src='./images/logoblack.png'
             height={75}
           />
         </Navbar.Brand>

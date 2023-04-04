@@ -20,9 +20,9 @@ function ImageModal({ searchedImages }) {
 
   const handleClose = () => setShow(false);
   
-
+  // Adds imageLink to db so it can be rendered as a image on the user's vision board   
   const handleAddImage = async (imageLink) => {
-      
+    // This is built this way to check if the user has already saved the image    
     const saveImage = searchedImages.find((image) => image.imageLink === imageLink);
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -42,13 +42,11 @@ function ImageModal({ searchedImages }) {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose} animation={true} >
         <Modal.Header closeButton>
           <Modal.Title>Search Results: </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className='img-container'> 
-          {/* Replace placeholders with the api res, or dont it could just be a cat website*/} 
           {searchedImages.map((images) => {
             return (
               <Row>
@@ -59,7 +57,7 @@ function ImageModal({ searchedImages }) {
                   ) : null}
                       <Button
                         disabled={image?.imageLink === images.imageLink}
-                        className='btn btn-dark mx-5 my-2 px-4'
+                        className='btn btn-dark'
                         onClick={() => handleAddImage(images.imageLink)}>
                         {image?.imageLink === images.imageLink
                           ? 'Image added'
@@ -73,14 +71,10 @@ function ImageModal({ searchedImages }) {
             </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant='secondary' onClick={handleClose}>
-            Close
-          </Button>
-          <Button className='custom-btn' variant='primary' onClick={handleClose}>
-            Save
+          <Button className='custom-btn' size='lg' variant='primary' onClick={handleClose}>
+            Done
           </Button>
         </Modal.Footer>
-      </Modal>
     </>
   );
 }
