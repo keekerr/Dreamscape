@@ -3,8 +3,9 @@
 :root {
   --lightblue: #c5d3ff;
   --darkblue: #b8c9ff;
-  --darkerblue: #97afff;
+  --darkerblue: #7092ff;
   --shadow: rgb(155, 155, 155);
+  --green: #2eb499;
 
 }
 
@@ -56,6 +57,7 @@ code {
 
 .nav-link:hover {
   box-shadow: 3px 5px 10px -5px var(--shadow);
+  transform: scale(1.1)
 }
 
 .nav-link:active
@@ -85,9 +87,9 @@ code {
 
 
 .custom-btn {
-  background-color: var(--darkerblue);
-  border-color: var(--darkerblue);
-  color: black;
+  background-color: var(--green);
+  border-color: var(--green);
+  color: white;
 }
 
 .custom-modal, .modal-dialog {
@@ -98,6 +100,36 @@ code {
 .custom-link {
   text-decoration: none;
 }
+
+.card:hover .btn-remove-image {
+  visibility: visible;
+  opacity: .75;
+}
+
+.card:hover {
+  cursor: grab;
+}
+
+.btn-remove-image {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+
+.btn-remove-image {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  background-color: transparent;
+  color: red;
+  opacity: 0;
+  transition: opacity 0.5s;
+  border: none;
+  font-size: 2rem;
+  visibility: hidden;
+}
+
 
 
 

@@ -58,7 +58,7 @@ function ImageModal({ searchedImages }) {
                   ) : null}
                       <Button
                         disabled={image?.imageLink === images.imageLink}
-                        className='btn btn-dark mx-5 my-2 px-4'
+                        className='btn btn-dark'
                         onClick={() => handleAddImage(images.imageLink)}>
                         {image?.imageLink === images.imageLink
                           ? 'Image added'
@@ -72,11 +72,8 @@ function ImageModal({ searchedImages }) {
             </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant='secondary' onClick={handleClose}>
-            Close
-          </Button>
-          <Button className='custom-btn' variant='primary' onClick={handleClose}>
-            Save
+          <Button className='custom-btn' size='lg' variant='primary' onClick={handleClose}>
+            Done
           </Button>
         </Modal.Footer>
     </>
