@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_USER } from '../utils/queries';
 import { REMOVE_IMAGE } from '../utils/mutations';
@@ -27,8 +27,14 @@ const VisionBoard = () => {
   const [showModal, setShowModal] = useState(false);
   const visionBoardData = data?.user || {};
 
+  useEffect(() => {
+    if (!Auth.loggedIn()) {
+      window.location.replace('/login-signup');
+    } 
+  }, []);
+
   // handleFormSubmit queries Unsplash API using the searchInput state, and returns the images in the ImageModal
-  // It also clears the searchInput state, and takes the data returned from searchImages and passes it into setSearchedImages
+  // It also clears the searchInput state, and takes the data returned from searchImages and passes it into setSearchedImages    
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -80,18 +86,18 @@ const VisionBoard = () => {
       <div>
         <Container className='d-flex justify-content-center'>
           <Form onSubmit={handleFormSubmit} className='mb-5'>
-            <Row>
+          <Row>
               <Col xs={12} md={11}>
-                <Form.Control
-                  name='searchInput'
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                  type='text'
-                  size='lg'
-                  placeholder='Search for an Image'
+              <Form.Control
+                name='searchInput'
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                type='text'
+                size='lg'
+                placeholder='Search for an Image'
                   className='mb-3'
                 />
-              </Col>
+            </Col>
               <Col xs={12} md={1}>
                 <Button
                   type='submit'
@@ -99,11 +105,11 @@ const VisionBoard = () => {
                   size='lg'
                   className='btn px-4 custom-btn'
                 >
-                  Submit
-                </Button>
-              </Col>
-            </Row>
-          </Form>
+                Submit
+              </Button>
+            </Col>
+          </Row>
+        </Form>
         </Container>
         <Modal show={showModal} onHide={() => setShowModal(false)}>
           <ImageModal searchedImages={searchedImages} />
@@ -113,7 +119,7 @@ const VisionBoard = () => {
         <Row>
           {visionBoardData.images &&
             visionBoardData.images.map((images) => {
-              return (
+            return (
                 <Col md='4'>
                   <Card
                     key={images.imageLink}
@@ -135,9 +141,9 @@ const VisionBoard = () => {
                       <i class='bi bi-trash'></i>
                     </div>
                   </Card>
-                </Col>
-              );
-            })}
+              </Col>
+            );
+          })}
         </Row>
       </Container>
     </DndProvider>

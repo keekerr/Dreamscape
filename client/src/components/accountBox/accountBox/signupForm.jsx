@@ -33,7 +33,6 @@ export function SignupForm(props) {
 
   const handleFormSubmit = async (event) => {
       event.preventDefault();
-      console.log(userData);
 
       const form = event.currentTarget;
       if (form.checkValidity() === false) {
