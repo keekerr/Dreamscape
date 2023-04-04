@@ -2,7 +2,7 @@ import React from 'react';
 
 function DiaryEntry({ entry, handleRemoveEntry }) {
   return (
-    <div className='card mt-4' key={entry._id}>
+    <div className='card mt-4' key={entry._id} style={{ maxWidth: "75vw" }}>
       <div className='card-header h4' style={{ textAlign: "left", backgroundColor: "#7092ff", color: "white" }}>{entry.title}
       <button
           type='button'
