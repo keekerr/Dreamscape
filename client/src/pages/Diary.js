@@ -12,7 +12,7 @@ const DiaryEntries = () => {
 
   useEffect(() => {
     if (!Auth.loggedIn()) {
-      window.location.href('/login-signup');
+      window.location.replace('/login-signup');
     } 
   }, []);
 
