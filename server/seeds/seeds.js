@@ -64,34 +64,5 @@ db.once('open', async () => {
     ])
 
     console.log("users seeded!")
-    //     // Create a new diary entry
-    //     const entries = await Diary.insertMany([
-    //         [
-    
-    //         ]
-    //     ]);
-
-    //     // Find a user by ID
-    //     const user = await User.findByPk(1);
-
-    //     // Create a new vision board
-    //     const newVisionBoard = await VisionBoard.create({
-    //         imageLink: 'https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?cs=srgb&dl=pexels-pixabay-45201.jpg&fm=jpg',
-    //     });
-
-    //     // Update a diary entry
-    //     const diaryEntryToUpdate = await Diary.findByPk(1);
-    //     diaryEntryToUpdate.title = 'Updated Entry Title';
-    //     diaryEntryToUpdate.content = 'Updated entry content';
-    //     await diaryEntryToUpdate.save();
-
-    //     // Delete a vision board
-    //     const visionBoardToDelete = await VisionBoard.findByPk(1);
-    //     await visionBoardToDelete.destroy();
-
-    //     console.log('all done!');
-    //     process.exit(0);
-    // } catch (err) {
-    //     console.error(err);
         process.exit(1);
 });

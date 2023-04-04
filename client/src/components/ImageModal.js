@@ -47,7 +47,6 @@ function ImageModal({ searchedImages }) {
         </Modal.Header>
         <Modal.Body>
           <div className='img-container'> 
-          {/* Replace placeholders with the api res, or dont it could just be a cat website*/} 
           {searchedImages.map((images) => {
             return (
               <Row>
