@@ -5,7 +5,7 @@ import { REMOVE_IMAGE } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { useDrag } from 'react-dnd';
+import { useDrag, useDrop } from 'react-dnd';
 import {
   Container,
   Col,
@@ -17,7 +17,56 @@ import {
 } from 'react-bootstrap';
 import { searchImages } from '../utils/API'
 
-import ImageModal from '../components/ImageModal';
+import MyImageModal from '../components/ImageModal';
+
+const Image = ({ image, id, index, moveImage }) => {
+  const [{ isDragging }, drag] = useDrag({
+    item: { type: 'image', index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+    end: (dropResult, monitor) => {
+      const { index: droppedIndex } = dropResult || {};
+      const { index: draggedIndex } = monitor.getItem();
+      if (droppedIndex !== undefined && draggedIndex !== undefined && droppedIndex !== draggedIndex) {
+        moveImage(draggedIndex, droppedIndex);
+      }
+    },
+  });
+
+  return (
+    <div key={id} ref={drag} style={{ opacity: isDragging ? 0.5 : 1 }}>
+      {image.imageLink && <img src={image.imageLink} alt={image.description} />}
+    </div>
+  );
+};
+
+const DropZone = ({ searchedImages, setVisionBoardData, visionBoardData }) => {
+  const [, drop] = useDrop({
+    accept: 'image',
+    drop: (item, monitor) => {
+      const droppedImage = searchedImages[item.index];
+      if (!droppedImage) {
+        return;
+      }
+      const updatedData = [...visionBoardData, droppedImage];
+      setVisionBoardData(updatedData);
+    },
+  });
+
+  return <div ref={drop} style={{ height: '100%' }} />;
+};
+
+const ImageModal = ({ searchedImages }) => {
+  return (
+    <div>
+      {searchedImages.map((image, index) => (
+        <Image key={index} id={image.id} image={image} index={index} />
+      ))}
+    </div>
+  );
+};
+
 
 const VisionBoard = () => {
   const { data } = useQuery(GET_USER);
@@ -30,7 +79,7 @@ const VisionBoard = () => {
   useEffect(() => {
     if (!Auth.loggedIn()) {
       window.location.replace('/login-signup');
-    } 
+    }
   }, []);
 
   // handleFormSubmit queries Unsplash API using the searchInput state, and returns the images in the ImageModal
@@ -81,23 +130,41 @@ const VisionBoard = () => {
     }
   };
 
+  const moveImage = useCallback(
+    (dragIndex, hoverIndex) => {
+      const dragImage = visionBoardData.images[dragIndex];
+      setVisionBoardData(
+        update(visionBoardData, {
+          images: {
+            $splice: [
+              [dragIndex, 1],
+              [hoverIndex, 0, dragImage],
+            ],
+          },
+        })
+      );
+    },
+    [visionBoardData]
+  );
+  
   return (
     <DndProvider backend={HTML5Backend}>
+      <DropZone />
       <div>
         <Container className='d-flex justify-content-center'>
           <Form onSubmit={handleFormSubmit} className='mb-5'>
-          <Row>
+            <Row>
               <Col xs={12} md={11}>
-              <Form.Control
-                name='searchInput'
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                type='text'
-                size='lg'
-                placeholder='Search for an Image'
+                <Form.Control
+                  name='searchInput'
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  type='text'
+                  size='lg'
+                  placeholder='Search for an Image'
                   className='mb-3'
                 />
-            </Col>
+              </Col>
               <Col xs={12} md={1}>
                 <Button
                   type='submit'
@@ -105,21 +172,21 @@ const VisionBoard = () => {
                   size='lg'
                   className='btn px-4 custom-btn'
                 >
-                Submit
-              </Button>
-            </Col>
-          </Row>
-        </Form>
+                  Submit
+                </Button>
+              </Col>
+            </Row>
+          </Form>
         </Container>
         <Modal show={showModal} onHide={() => setShowModal(false)}>
-          <ImageModal searchedImages={searchedImages} />
+          <MyImageModal searchedImages={searchedImages} />
         </Modal>
       </div>
       <Container className='mt-5 '>
         <Row>
           {visionBoardData.images &&
             visionBoardData.images.map((images) => {
-            return (
+              return (
                 <Col md='4'>
                   <Card
                     key={images.imageLink}
@@ -138,12 +205,12 @@ const VisionBoard = () => {
                       className='btn-remove-image'
                       onClick={() => handleRemoveImage(images.imageID)}
                     >
-                      <i class='bi bi-trash'></i>
+                      <i className='bi bi-trash'></i>
                     </div>
                   </Card>
-              </Col>
-            );
-          })}
+                </Col>
+              );
+            })}
         </Row>
       </Container>
     </DndProvider>
